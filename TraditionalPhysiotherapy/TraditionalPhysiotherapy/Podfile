@@ -1,0 +1,22 @@
+platform :ios, '8.0'
+target 'TraditionalPhysiotherapy' do
+pod 'Masonry', '~> 0.6.2'               #自适应布局
+pod 'ZipArchive', '~> 1.4.0'            #压缩工具
+pod 'FMDB/SQLCipher', '~> 2.5'          #数据库＋sqlcipher 数据库操作以及数据库加密
+pod 'CocoaLumberjack', '~> 2.0.1'       #日志工具
+pod 'MBProgressHUD', '~> 0.9.1'         #菊花
+pod 'AFNetworking', '~> 2.5.4'          #第三方网络库
+#pod 'LBXScan','~> 1.1.1'                #扫二维码
+pod 'SDWebImage', '~> 3.7.3'            #异步加载并缓存图片
+pod 'WYPopoverController', '~> 0.3.9'   #类似于UIPopoverController的弹出视图
+pod 'MarqueeLabel', '~> 3.0.1'        #跑马灯
+pod 'UICountingLabel','~> 1.2.0'        #PNchart必备库(PNChart定制)
+pod 'PushNotificationManager'
+pod 'TYAlertController'
+pod 'PGDatePicker','~> 2.0.1'
+pod 'VIMVideoPlayer'
+pod 'LLSimpleCamera', '~> 4.1'
+pod 'EasyShowView','~>2.0'
+pod 'HWDownSelectedView', '~> 1.0.1'
+pod 'TYCyclePagerView'
+end    
