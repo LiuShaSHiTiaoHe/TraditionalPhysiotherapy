@@ -29,12 +29,10 @@
     if (viewMode)
     {
         datePicker.datePickerMode = PGDatePickerModeYear;
-
     }
     else
     {
         datePicker.datePickerMode = PGDatePickerModeYearAndMonth;
-
     }
     datePicker.delegate = self;
     [contentView addSubview:datePicker];
@@ -90,7 +88,6 @@
 -(void)commiteBtnAction
 {
     [datePicker tapSelectedHandler];
-    //    [self hideInController];
 }
 
 -(void)cancleBtnAction

@@ -74,9 +74,6 @@
     [cancleBtn addTarget:self action:@selector(cancleBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [titleView addSubview:cancleBtn];
     
-    
-
-    
     commiteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [commiteBtn addTarget:self action:@selector(commiteBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [commiteBtn setBackgroundColor:[UIColor colorWithHexString:@"44e6cd"]];
@@ -192,7 +189,6 @@
 
 -(void)cancleBtnAction
 {
-//    [self hideInController];
     [self removeFromSuperview];
 }
 
@@ -215,7 +211,6 @@
     [[ContactsDao shareInstanceContactDao] updateUserBalance:curentInfo.userId andBalance:[NSString stringWithFormat:@"%ld",total]];
     [[NSNotificationCenter defaultCenter] postNotificationName:UserDataBaseChanged object:nil];
 
-//    [self hideInController];
     [self removeFromSuperview];
 
 }

@@ -39,8 +39,6 @@
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     infoCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     infoCollectionView.backgroundColor = [UIColor colorWithHexString:@"f5f5f5"];
-//    infoCollectionView.backgroundColor = [UIColor whiteColor];
-
     infoCollectionView.showsVerticalScrollIndicator = NO;
     infoCollectionView.showsHorizontalScrollIndicator = NO;
     infoCollectionView.dataSource = self;
@@ -53,8 +51,6 @@
     
     [self addSubview:infoCollectionView];
     
-    
-
     [infoCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top);
         make.bottom.equalTo(self.mas_bottom);
@@ -76,22 +72,6 @@
 
 -(void)setViewData:(ContactInfo *)info
 {
-//    userName.text = info.userName;
-//    if (![NSObject isNullOrNilWithObject:info.userImage])
-//    {
-//        headImage.image = [UIImage imageWithContentsOfFile:info.userImage];
-//    }
-//    else
-//    {
-//        if ([info.userGender isEqualToString:@"male"])
-//        {
-//            headImage.image = [UIImage imageNamed:@"male" imageBundle:@"contact"];
-//        }
-//        else
-//        {
-//            headImage.image = [UIImage imageNamed:@"female" imageBundle:@"contact"];
-//        }
-//    }
     currentInfo = info;
     [infoCollectionView reloadData];
 }
@@ -203,7 +183,6 @@
                 {
                     cell.iconImage.image = [UIImage imageNamed:@"bill" imageBundle:@"contact"];
                     cell.infoText.text = @"消费账单";
-
                 }
                     break;
                 case 2://记录
@@ -211,7 +190,6 @@
                     cell.iconImage.image = [UIImage imageNamed:@"record" imageBundle:@"contact"];
                     cell.infoText.text = @"治疗记录";
                     cell.hLine.hidden = YES;
-
                 }
                     break;
                 default:
@@ -238,7 +216,6 @@
                      if (![NSObject isNullOrNilWithObject:currentInfo.userPhone])
                      {
                          cell.infoText.text = currentInfo.userPhone;
-
                      }
                     else
                     {
@@ -250,11 +227,9 @@
                 case 1://微信
                 {
                     cell.iconImage.image = [UIImage imageNamed:@"wechat" imageBundle:@"contact"];
-//                    cell.infoText.text = currentInfo.userWechat;
                     if (![NSObject isNullOrNilWithObject:currentInfo.userWechat])
                     {
                         cell.infoText.text = currentInfo.userWechat;
-                        
                     }
                     else
                     {
@@ -267,11 +242,9 @@
                 case 2://QQ
                 {
                     cell.iconImage.image = [UIImage imageNamed:@"qq" imageBundle:@"contact"];
-//                    cell.infoText.text = currentInfo.userWechat;
                     if (![NSObject isNullOrNilWithObject:currentInfo.userQQ])
                     {
                         cell.infoText.text = currentInfo.userQQ;
-                        
                     }
                     else
                     {
@@ -302,11 +275,9 @@
                 case 0:
                 {
                     cell.infoText.text  =@"身高";
-//                    cell.detailText.text  =@"188";
                     if (![NSObject isNullOrNilWithObject:currentInfo.userHeight])
                     {
                         cell.detailText.text = currentInfo.userHeight;
-                        
                     }
                     else
                     {
@@ -322,7 +293,6 @@
                     if (![NSObject isNullOrNilWithObject:currentInfo.userWeight])
                     {
                         cell.detailText.text = currentInfo.userWeight;
-                        
                     }
                     else
                     {
@@ -338,7 +308,6 @@
                     if (![NSObject isNullOrNilWithObject:currentInfo.userAge])
                     {
                         cell.detailText.text = currentInfo.userAge;
-                        
                     }
                     else
                     {
@@ -355,7 +324,6 @@
                     if (![NSObject isNullOrNilWithObject:currentInfo.userJob])
                     {
                         cell.detailText.text = currentInfo.userJob;
-                        
                     }
                     else
                     {
@@ -372,7 +340,6 @@
                     if (![NSObject isNullOrNilWithObject:currentInfo.userBirthday])
                     {
                         cell.detailText.text = currentInfo.userBirthday;
-                        
                     }
                     else
                     {
@@ -389,7 +356,6 @@
                     if (![NSObject isNullOrNilWithObject:currentInfo.userHoroscope])
                     {
                         cell.detailText.text = currentInfo.userHoroscope;
-                        
                     }
                     else
                     {
@@ -475,31 +441,22 @@
                     BalanceShortView *bview = [[BalanceShortView alloc] initWithFrame:CGRectMake(0, 0, UIScreenWidth, UIScreenHeight)];
                     [bview setContactInfo:currentInfo];
                     bview.delegate = self;
-//                    [[MJPopTool sharedInstance] popView:bview animated:YES];
                     [[self viewController].view addSubview:bview];
-
                 }
                     break;
                 case 1:
                 {
-                    
                     BillDetailListView *bview = [[BillDetailListView alloc] initWithFrame:CGRectMake(0, 0, UIScreenWidth, UIScreenHeight)];
                     [bview setBillDetailUserInfo:currentInfo];
-//                    bview.delegate = self;
                     [[self viewController].view addSubview:bview];
-
-//                    [[MJPopTool sharedInstance] popView:bview animated:YES];
                 }
                     break;
                 case 2:
                 {
-                    
                     RecordListView *bview = [[RecordListView alloc] initWithFrame:CGRectMake(0, 0, UIScreenWidth, UIScreenHeight)];
                     [bview setRecordListUserInfo:currentInfo];
                     bview.delegate = self;
                     [[self viewController].view addSubview:bview];
-
-                    
                 }
                     break;
                 default:
@@ -601,7 +558,6 @@ referenceSizeForHeaderInSection:(NSInteger)section
 -(void)preViewImage:(NSString *)imagePath
 {
     ReViewPhotoView *review = [[ReViewPhotoView alloc] initWithFrame:CGRectMake(0, 0, UIScreenWidth, UIScreenHeight) Photo:[UIImage imageWithContentsOfFile:imagePath]];
-    
     CATransition *transition = [CATransition animation];
     transition.type = kCATransitionReveal;
     transition.duration = 0.5;

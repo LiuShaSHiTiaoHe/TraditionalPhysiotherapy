@@ -52,8 +52,6 @@
     
     infoTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     infoTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-//    infoTableView.backgroundColor = [UIColor colorWithHexString:@"f5f5f5"];
-    
     infoTableView.dataSource = self;
     infoTableView.delegate = self;
     [contentView addSubview:infoTableView];
@@ -122,8 +120,6 @@
     curentInfo = info;
     curentArray = [[BillDao shareInstanceBillDao] getBillInfoByUser:curentInfo.userId];
     [infoTableView reloadData];
-    NSLog(@"11111111");
-
 }
 
 #pragma mark UITableViewDelegate
@@ -189,8 +185,7 @@
     {
         height = height + 200;
     }
-//    height = height + 100;
-
+    
     if (info.projectArray.count > 0)
     {
         height = height + 40*info.projectArray.count;
@@ -201,7 +196,6 @@
 
 -(void)cancleBtnAction
 {
-//    [[MJPopTool sharedInstance] closeAnimated:YES];
     [self removeFromSuperview];
 }
 

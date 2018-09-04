@@ -118,9 +118,6 @@ static RecordDao *instance = nil;
     [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
         
         NSString *uuidString = [self uuidString];
-       
-//        [db executeUpdate:@"CREATE TABLE IF NOT EXISTS RechargeRecordTable (rechargeId TEXT, rechargeDate TEXT,rechargeNum TEXT,userId TEXT)"];
-
         [db executeUpdate:@"insert into RechargeRecordTable (rechargeId,rechargeDate,rechargeNum,userId,totalNum) values (?, ?, ?, ?,?)" ,
          uuidString,
          [recordDic objectForKey:@"rechargeDate"],
@@ -128,9 +125,7 @@ static RecordDao *instance = nil;
          [recordDic objectForKey:@"userId"],
          [recordDic objectForKey:@"totalNum"]
 
-         ];
-        
-        
+         ];        
     }];
 }
 

@@ -240,11 +240,9 @@
 
 -(void)otherPayAction
 {
-    
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     UIViewController *rootViewController = window.rootViewController;
-    
-    
+        
     NSMutableArray *arr = [OrderRecordInfo shareOrderRecordInfo].projectArray;
     NSInteger totalPrice = 0;
     for (NSMutableDictionary *dic in arr)
@@ -273,65 +271,6 @@
     };
     [self addSubview:qrview];
     
-    
-//    QRcodeViewController *QRvc = [[QRcodeViewController alloc] init];
-//    QRvc.costString = [NSString stringWithFormat:@"%ld",totalPrice];
-//    WS(weakSelf)
-//
-//    QRvc.commiteBlock = ^(){
-//        [weakSelf otherPaycommiteBlock];
-//    };
-////    QRvc.view.frame = CGRectMake(0, 0, UIScreenWidth, UIScreenHeight-100);
-//    QRvc.view.frame = CGRectMake(0, 0, 700, 400);
-//    UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:QRvc];
-//    [popup presentPopoverFromRect:CGRectMake(100, 20, 700, 400) inView:rootViewController.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-//    [self addSubview:QRvc.view];
-//    [self bringSubviewToFront:QRvc.view];
-    /*
-    if (currentContactInfo)
-    {
-        BillInfo *billInfo = [[BillInfo alloc] init];
-        billInfo.userid = currentContactInfo.userId;
-        billInfo.billid = [self uuidString];
-        billInfo.projectArray = [[NSMutableArray alloc] init];
-        NSMutableArray *arr = [OrderRecordInfo shareOrderRecordInfo].projectArray;
-        NSInteger totalPrice = 0;
-        for (NSMutableDictionary *dic in arr)
-        {
-            NSInteger count = [[dic objectForKey:@"count"] integerValue];
-            ProjectInfo *info = [dic objectForKey:@"info"];
-            NSInteger price = [info.projectprice integerValue];
-            totalPrice = totalPrice + count * price;
-        }
-        [billInfo.projectArray addObjectsFromArray:arr];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-        billInfo.recordTime = [dateFormatter stringFromDate:[NSDate date]];
-        billInfo.premoney = currentContactInfo.userAccountBalance;
-        billInfo.balance = currentContactInfo.userAccountBalance;
-        billInfo.total = [NSString stringWithFormat:@"%ld",totalPrice];
-        billInfo.isOtherPay = @"YES";
-        UIImage *tempImage = [UIImage getImageViewWithView:signatureView];
-        NSString *filePath = [userSignPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",billInfo.billid]];
-        NSData *imageData = UIImagePNGRepresentation(tempImage);
-        [imageData writeToFile:filePath atomically:YES];
-        billInfo.userSign = [NSString stringWithFormat:@"%@.png",billInfo.billid];
-        [[BillDao shareInstanceBillDao] addnewRecord:billInfo];
-        
-        [EasyShowTextView showText:@"结账成功"];
-        [self checkSucceed];
-
-    }
-    else
-    {
-        MBProgressHUD *my_hud = [[MBProgressHUD alloc] initWithView:self];
-        my_hud.mode = MBProgressHUDModeText;
-        my_hud.labelText = @"请选择会员";
-        [my_hud show:YES];
-        [self addSubview:my_hud];
-        [my_hud hide:YES afterDelay:3];
-    }
-     */
 }
 
 -(void)otherPaycommiteBlock

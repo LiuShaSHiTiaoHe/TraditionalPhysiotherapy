@@ -207,13 +207,6 @@
     }
 }
 
-//@property(nonatomic,strong)NSString *technicianname;
-//@property(nonatomic,strong)NSString *technicianGender;
-//@property(nonatomic,strong)NSString *technicianAge;
-//@property(nonatomic,strong)NSString *technicianPhone;
-//@property(nonatomic,strong)NSString *technicianImage;
-//@property(nonatomic,strong)NSString *remark;
-
 #pragma mark UITableVieDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -274,8 +267,6 @@
             break;
     }
 }
-
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -473,7 +464,6 @@
         else
         {
             [[TechnicianDao shareInstanceTechnicianDao] addNewTechnichian:info];
-
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:TechnicianDataBaseChange object:nil];
         [self cancleBtnAction];

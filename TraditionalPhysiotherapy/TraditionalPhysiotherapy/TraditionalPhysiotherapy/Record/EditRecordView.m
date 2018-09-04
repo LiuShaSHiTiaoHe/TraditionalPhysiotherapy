@@ -61,7 +61,6 @@
     [personalView addSubview:nameLabel];
     
     
-    
     textView = [FSTextView textView];
     textView.placeholder = @"输入记录";
     textView.borderWidth = 1.f;
@@ -80,9 +79,7 @@
         //        weakNoticeLabel.text = [NSString stringWithFormat:@"最多限制输入%zi个字符", textView.maxLength];
     }];
     
-    
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];    
     //2.初始化collectionView
     imageCollection = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     [self addSubview:imageCollection];

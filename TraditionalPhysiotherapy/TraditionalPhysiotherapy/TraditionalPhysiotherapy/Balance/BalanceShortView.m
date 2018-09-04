@@ -45,7 +45,6 @@
     [self addSubview:balanceLabel];
     
     balanceText = [[UILabel alloc] init];
-//    balanceText.text = @"2999";
     balanceText.font = [UIFont systemFontOfSize:28];
     balanceText.textColor = [UIColor grayColor];
     balanceText.textAlignment = NSTextAlignmentCenter;
@@ -59,21 +58,17 @@
     [whiteBackView addSubview:rechargeRecordbtn];
 
     confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [confirmBtn setBackgroundImage:[UIImage imageNamed:@"delete_ico1" imageBundle:@"home2"] forState:UIControlStateNormal];
     [confirmBtn addTarget:self action:@selector(confirmBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [confirmBtn setBackgroundColor:[UIColor colorWithHexString:@"4eccff"]];
     [confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
     [whiteBackView addSubview:confirmBtn];
     
     rechargeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [rechargeBtn setBackgroundImage:[UIImage imageNamed:@"delete_ico1" imageBundle:@"home2"] forState:UIControlStateNormal];
     [rechargeBtn addTarget:self action:@selector(rechargeBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [rechargeBtn setBackgroundColor:[UIColor colorWithHexString:@"44e6cd"]];
     [rechargeBtn setTitle:@"去充值" forState:UIControlStateNormal];
 
     [whiteBackView addSubview:rechargeBtn];
-    
-    
     
     [backGroundView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top);
@@ -85,7 +80,6 @@
     
     [whiteBackView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-//        make.centerY.equalTo(self.mas_centerY);
         make.top.equalTo(self.mas_top).offset(150.);
         make.width.equalTo(600.);
         make.height.equalTo(300.);
@@ -110,17 +104,13 @@
     
     [balanceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(iconImageView.mas_bottom).offset(20);
-//        make.left.equalTo(whiteBackView.mas_left).offset(100);
-//        make.width.equalTo(100.);
         make.left.equalTo(whiteBackView.mas_left);
         make.right.equalTo(whiteBackView.mas_right);
         make.height.equalTo(40.);
-        
     }];
     
     [balanceText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(balanceLabel.mas_bottom).offset(30);
-//        make.left.equalTo(whiteBackView.mas_left).offset(100);
         make.width.equalTo(200.);
         make.centerX.equalTo(whiteBackView.mas_centerX);
         make.height.equalTo(30.);
@@ -156,7 +146,6 @@
 
 -(void)confirmBtnAction
 {
-//    [[MJPopTool sharedInstance] closeAnimated:YES];
     [self removeFromSuperview];
 }
 
@@ -166,9 +155,7 @@
     {
         [delegate BalanceShortViewShowRechargeRecord];
     }
-    
     [self removeFromSuperview];
-
 }
 
 -(void)rechargeBtnAction
@@ -178,9 +165,6 @@
         [delegate BalanceShortViewRecharge];
     }
     [self removeFromSuperview];
-
-//    [[MJPopTool sharedInstance] closeAnimated:YES];
-
 }
 
 

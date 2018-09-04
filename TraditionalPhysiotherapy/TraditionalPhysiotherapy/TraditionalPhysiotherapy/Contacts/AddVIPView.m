@@ -48,8 +48,6 @@
     [cancleBtn addTarget:self action:@selector(cancleBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [titleView addSubview:cancleBtn];
     
-    
-    
     deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
     [deleteBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
@@ -503,10 +501,7 @@
 #pragma mark 页面事件
 -(void)cancleBtnAction
 {
-//    [[MJPopTool sharedInstance] closeAnimated:YES];
-//    [self hideInController];
     [self removeFromSuperview];
-    
 }
 
 -(void)deleteBtnAction
@@ -514,7 +509,6 @@
     [[ContactsDao shareInstanceContactDao] deleteSelectedUserInfo:currentInfo.userId];
     [[NSNotificationCenter defaultCenter] postNotificationName:UserDataBaseChanged object:nil];
     [self cancleBtnAction];
-
 }
 
 
@@ -602,10 +596,7 @@
     NSLog(@"Send %@",images);
     userImage.image = [images objectAtIndex:0];
     userHeadImage = [self savescanresultimage:[images objectAtIndex:0] imagename:@"temp"];
-//    userHeadImage = [userDocumentPath stringByAppendingPathComponent:@"temp"]; //Add the file name
-
     [imagePickerController dismissViewControllerAnimated:YES completion:^{
-        
         [infoTableView reloadData];
     }];
 }

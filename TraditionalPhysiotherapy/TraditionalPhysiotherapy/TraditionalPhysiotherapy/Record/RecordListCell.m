@@ -63,11 +63,6 @@
         // 设置自动纠错方式
         recordText.autocorrectionType = UITextAutocorrectionTypeNo;
         
-        //外框
-//        recordText.layer.borderColor = [UIColor lightGrayColor].CGColor;
-//        recordText.layer.borderWidth = 1;
-//        recordText.layer.cornerRadius =5;
-        
         // 设置是否可以拖动
         recordText.scrollEnabled = YES;
 

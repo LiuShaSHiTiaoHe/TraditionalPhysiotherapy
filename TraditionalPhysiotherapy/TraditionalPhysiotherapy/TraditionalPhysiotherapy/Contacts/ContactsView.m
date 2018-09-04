@@ -20,12 +20,7 @@
     {
         return nil;
     }
-    
     self.backgroundColor = [UIColor whiteColor];
-    
-//    titleImageView = [[UIImageView alloc] init];
-//    titleImageView.backgroundColor = [UIColor clearColor];
-//    [self addSubview:titleImageView];
     
     myNavView = [[UIView alloc] init];
     myNavView.backgroundColor = [UIColor colorWithHexString:@"4977f1"];
@@ -79,16 +74,7 @@
     [self addSubview:line];
     
     contentScrollView = [[UIView alloc] init];
-//    contentScrollView.backgroundColor = [UIColor redColor];
     [self addSubview:contentScrollView];
-    
-//    [titleImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.mas_top);
-//        make.right.equalTo(self.mas_right);
-//        make.left.equalTo(self.mas_left);
-//        make.height.equalTo(20.);
-//
-//    }];
     
     [myNavView mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -160,11 +146,8 @@
     }
     else
     {
-        
-        
         [searchBar mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(myNavView.mas_top).offset(70);
-
         }];
     }
 }

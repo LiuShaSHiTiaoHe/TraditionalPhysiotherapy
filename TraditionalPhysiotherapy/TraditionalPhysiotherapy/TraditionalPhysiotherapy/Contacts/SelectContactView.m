@@ -64,9 +64,6 @@
     searchCancleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [searchCancleBtn setTitle:@"取消" forState:UIControlStateNormal];
     [searchCancleBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-//    [searchCancleBtn setBackgroundColor:[UIColor colorWithHexString:@"47b9fe"]];
-//    searchCancleBtn.layer.cornerRadius = 10.;
-//    searchCancleBtn.clipsToBounds = YES;
     [searchCancleBtn addTarget:self action:@selector(cancleSearch) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:searchCancleBtn];
     
@@ -221,14 +218,6 @@
 #pragma mark UITableVieDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    if (searchString.length > 0)
-//    {
-//        return searchArray.count;
-//    }
-//    else
-//    {
-//        return contactArray.count;
-//    }
     return searchArray.count;
 }
 

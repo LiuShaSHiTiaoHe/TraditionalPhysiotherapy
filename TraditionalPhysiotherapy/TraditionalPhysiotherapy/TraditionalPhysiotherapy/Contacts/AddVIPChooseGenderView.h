@@ -18,15 +18,11 @@
 @interface AddVIPChooseGenderView : UIView
 {
     UIView *contentView;
-
     UIButton *maleButton;
     UIButton *femaleButton;
-    
     UIButton *commiteBtn;
     UIButton *cancleBtn;
-    
     __weak id<AddVIPChooseGenderViewDelegate>delegate;
-    
 }
 
 @property(nonatomic,weak)id<AddVIPChooseGenderViewDelegate>delegate;

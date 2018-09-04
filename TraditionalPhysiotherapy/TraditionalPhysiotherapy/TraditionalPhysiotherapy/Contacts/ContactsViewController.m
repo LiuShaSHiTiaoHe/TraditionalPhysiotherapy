@@ -53,7 +53,6 @@
     [contentView.contentScrollView addSubview:userDetailView];
     userDetailView.delegate = self;
     [userDetailView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.equalTo(contentView.contentScrollView);
         make.top.equalTo(contentView.contentScrollView.mas_top).offset(-20);
         make.left.equalTo(contentView.contentScrollView.mas_left);
         make.right.equalTo(contentView.contentScrollView.mas_right);
@@ -238,17 +237,12 @@
     return cStr;
 }
 
-//- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//
-//}
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (isSearching)
     {
         return NO;
     }
-//    return YES;
     return NO;
 }
 
