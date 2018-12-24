@@ -10,6 +10,7 @@
 #import "TechnicianInfo.h"
 
 @implementation TechnicianTableViewCell
+@synthesize headPic,nameLabel,arrowImage;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -68,8 +69,8 @@
 
 -(void)configWithEntity:(TechnicianInfo *)entity
 {
-    self.textLabel.textColor = [UIColor darkGrayColor];
-    self.textLabel.font = [UIFont systemFontOfSize:16];
+//    self.textLabel.textColor = [UIColor darkGrayColor];
+//    self.textLabel.font = [UIFont systemFontOfSize:16];
     if ([NSObject isNullOrNilWithObject:entity.technicianImage])
     {
         if ([entity.technicianGender isEqualToString:@"male"])

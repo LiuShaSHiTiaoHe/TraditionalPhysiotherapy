@@ -177,7 +177,25 @@
         }
         if (info.technicianImage)
         {
-            userImage.image = [UIImage imageWithContentsOfFile:info.technicianImage];
+//            userImage.image = [UIImage imageWithContentsOfFile:info.technicianImage];
+            if ([NSObject isNullOrNilWithObject:info.technicianImage])
+            {
+                if ([currentInfo.technicianGender isEqualToString:@"male"])
+                {
+                    userImage.image = [UIImage imageNamed:@"male" imageBundle:@"contact"];
+                }
+                else
+                {
+                    userImage.image = [UIImage imageNamed:@"female" imageBundle:@"contact"];
+                }
+                
+            }
+            else
+            {
+                userImage.image = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:info.technicianImage]];
+                
+            }
+            
             userHeadImage =  info.technicianImage;
         }
         phone = info.technicianPhone;

@@ -110,6 +110,10 @@
         TechnicianInfo *technicianinfo = [[OrderRecordInfo shareOrderRecordInfo].technicianDic objectForKey:info.projectid];
         technicianLabel.text = technicianinfo.technicianname;
     }
+    else
+    {
+        technicianLabel.text = @"选择技师";
+    }
 }
 
 

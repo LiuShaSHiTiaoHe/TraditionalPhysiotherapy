@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'AD437F71C6CBF86907F21A0601441F60'
-               BlueprintName = 'VIMVideoPlayer'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libVIMVideoPlayer.a'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CC76F2FCE34FAF1B20FCDA632A752F20"
+               BlueprintName = "VIMVideoPlayer"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "libVIMVideoPlayer.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

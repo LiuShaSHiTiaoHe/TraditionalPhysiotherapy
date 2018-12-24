@@ -17,5 +17,9 @@
     
 }
 
+@property(nonatomic,strong)UIImageView *headPic;
+@property(nonatomic,strong)UILabel *nameLabel;
+@property(nonatomic,strong)UIImageView *arrowImage;
+
 -(void)configWithEntity:(TechnicianInfo *)entity;
 @end

@@ -397,6 +397,7 @@
         [my_hud show:YES];
         [self addSubview:my_hud];
         [my_hud hide:YES afterDelay:3];
+        
     }
     
 }
@@ -488,7 +489,7 @@
     }
     else
     {
-        headPic.image = [UIImage imageWithContentsOfFile:contact.userImage];
+        headPic.image = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:contact.userImage]];
     }
     nameLabel.text = contact.userName;
     [self getTotalPrice];

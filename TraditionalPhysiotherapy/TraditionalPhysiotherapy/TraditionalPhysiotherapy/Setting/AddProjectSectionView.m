@@ -143,18 +143,19 @@
 
 -(void)confirmBtnAction
 {
-    MBProgressHUD *my_hud = [[MBProgressHUD alloc] initWithView:self];
-    my_hud.mode = MBProgressHUDModeText;
+//    MBProgressHUD *my_hud = [[MBProgressHUD alloc] initWithView:self];
+//    my_hud.mode = MBProgressHUDModeText;
   
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if ([nameTextFiled.text isEqualToString:@""])
     {
-        my_hud.labelText = @"请输入名称";
-        [my_hud show:YES];
-        [self addSubview:my_hud];
-        [my_hud hide:YES afterDelay:3];
-        
+//        my_hud.labelText = @"请输入名称";
+//        [my_hud show:YES];
+//        [self addSubview:my_hud];
+//        [my_hud hide:YES afterDelay:3];
+        [GlobalDataManager showHUDWithText:@"请输入名称" addTo:self dismissDelay:2. animated:YES];
+
         return;
     }
     if ([textView.text isEqualToString:@""])
@@ -165,11 +166,12 @@
     [dic setObject:textView.text forKey:@"sectiondescription"];
     [[ProjectDao shareInstanceProjectDao] addNewSection:dic];
 //    [EasyShowTextView showText:@"添加成功"];
-    my_hud.labelText = @"添加成功";
-    [my_hud show:YES];
-    [self addSubview:my_hud];
-    [my_hud hide:YES afterDelay:2];
-    
+//    my_hud.labelText = @"添加成功";
+//    [my_hud show:YES];
+//    [self addSubview:my_hud];
+//    [my_hud hide:YES afterDelay:2];
+    [GlobalDataManager showHUDWithText:@"添加成功" addTo:self dismissDelay:2. animated:YES];
+
     [self cancleBtnAction];
 }
 

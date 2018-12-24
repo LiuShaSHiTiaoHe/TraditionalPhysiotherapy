@@ -38,7 +38,6 @@
         name.font =[UIFont fontWithName:@"FZKTJW--GB1-0" size:23];
 //        name.textColor = rgba(130, 130, 130, 1);
         name.textColor = [UIColor whiteColor];
-
         name.highlightedTextColor = [UIColor colorWithHexString:@"4977f1"];
         [self.contentView addSubview:name];
         
@@ -74,7 +73,7 @@
     
     self.contentView.backgroundColor = selected ? [UIColor colorWithHexString:@"323b4d"] : [UIColor clearColor];
     self.highlighted = selected;
-//    self.name.highlighted = selected;
+    self.name.highlighted = selected;
     line.hidden = !selected;
 }
 

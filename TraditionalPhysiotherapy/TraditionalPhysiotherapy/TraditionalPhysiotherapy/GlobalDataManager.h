@@ -10,6 +10,11 @@
 
 @interface GlobalDataManager : NSObject
 
++ (UIImage *)resizeImageByvImage:(UIImage *)srcImage;
++ (UIImage *)resizeImageByvImage:(UIImage *)srcImage withScale:(double)scale;
+
++ (void)showHUDWithText:(NSString *)message addTo:(UIView *)view dismissDelay:(double) delay animated:(BOOL)animated;
+
 #pragma mark 手势密码是否打开
 + (BOOL)OpenGestureCode;
 #pragma mark 设置手势打开或者关闭

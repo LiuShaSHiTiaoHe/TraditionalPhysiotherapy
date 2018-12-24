@@ -27,6 +27,7 @@
 {
     NSInteger _selectIndex;
     BOOL _isScrollDown;
+    NSMutableDictionary *projectImageDic;
 }
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -48,6 +49,7 @@
     
     _selectIndex = 0;
     _isScrollDown = YES;
+    projectImageDic = [NSMutableDictionary new];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.extendedLayoutIncludesOpaqueBars = NO;
@@ -55,15 +57,12 @@
     self.view.backgroundColor = [UIColor blackColor];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
-//    _tableView.backgroundColor = [UIColor colorWithHexString:@"fc9d9a"];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.tableFooterView = [UIView new];
     _tableView.rowHeight = 80;
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     _tableView.showsVerticalScrollIndicator = NO;
-//    _tableView.separatorColor = [UIColor clearColor];
-//    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tableView registerClass:[LeftMenuTableViewCell class] forCellReuseIdentifier:kCellIdentifier_Left];
     [self.view addSubview:self.tableView];
@@ -89,7 +88,6 @@
     _collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     _collectionView.showsVerticalScrollIndicator = NO;
     _collectionView.showsHorizontalScrollIndicator = NO;
-//    [_collectionView setBackgroundColor:[UIColor colorWithHexString:@"f9cdad"]];
     [_collectionView setBackgroundColor:[UIColor colorWithHexString:@"edf5f5"]];
 
     //注册cell
@@ -304,6 +302,7 @@
         {
             if ([info.isdelete isEqualToString:@"0"])
             {
+                [self getProjectImage:info];
                 [projectArray addObject:info];
             }
         }
@@ -314,11 +313,19 @@
     }
     [_tableView reloadData];
     [_collectionView reloadData];
-
-    
-
 }
 
+-(void)getProjectImage:(ProjectInfo *)info
+{
+    if (info.projectimages.count > 0)
+    {
+        NSString *filePath = [projectPicPath stringByAppendingPathComponent:[info.projectimages objectAtIndex:0]];
+//        UIImage *proimage = [UIImage imageWithContentsOfFile:filePath];
+//        NSData *data = UIImageJPEGRepresentation(proimage, 0.4);
+        UIImage *resultImage = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:filePath]];
+        [projectImageDic setObject:resultImage forKey:info.projectid];
+    }
+}
 
 -(void)updateCartNumber
 {
@@ -345,10 +352,24 @@
 {
     OrderView *itemView = [[OrderView alloc] initWithFrame:CGRectMake(0, 0, UIScreenWidth, UIScreenHeight)];
     itemView.delegate = self;
-//    NSMutableArray *projectArray = [[_dataSource objectAtIndex:indexPath.section] objectForKey:@"ProjectArray"];
-//    ProjectInfo *info = [projectArray objectAtIndex:indexPath.row];
-//    [itemView setViewProjectInfo:info];
     [itemView showInController:self preferredStyle:TYAlertControllerStyleAlert transitionAnimation:TYAlertTransitionAnimationDropDown backgoundTapDismissEnable:YES];
+    
+//    menuVC = [[SelectShowStyleByDateViewController alloc] init];
+//    menuVC.viewMode = viewMode;
+//    menuVC.delegate = self;
+//    menuVC.modalPresentationStyle = UIModalPresentationPopover;
+//    menuVC.preferredContentSize = CGSizeMake(400, 300);
+//
+//    UIPopoverPresentationController *pop = menuVC.popoverPresentationController;
+//    pop.sourceView = chooseDateBtn;
+//    pop.sourceRect = CGRectMake(chooseDateBtn.frame.size.width / 2, chooseDateBtn.frame.size.height, 0, 0);
+//    pop.permittedArrowDirections = UIPopoverArrowDirectionUp;
+//    pop.backgroundColor = [UIColor whiteColor];
+//    pop.delegate = self;
+//    [self presentViewController:menuVC animated:YES completion:^{
+//
+//    }];
+    
 }
 
 #pragma mark OrderViewDelegate
@@ -427,6 +448,11 @@
     [cell setCellProjectInfo:info];
     cell.name.text = info.projectname;
     cell.delegate = self;
+    UIImage *proImage = [projectImageDic objectForKey:info.projectid];
+    if (proImage)
+    {
+        cell.imageView.image = proImage;
+    }
 //    cell.layer.borderColor=[UIColor blackColor].CGColor;
 //    cell.layer.borderWidth=0.3;
 //    CGRect rect = [cell convertRect:cell.bounds toView:[collectionView superview]];

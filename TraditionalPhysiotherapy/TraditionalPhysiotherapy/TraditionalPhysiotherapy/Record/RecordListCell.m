@@ -181,7 +181,7 @@
     
     NSString *stringNameWithPNG = [curentArray objectAtIndex:indexPath.row];
     NSString *filePath = [recordImagePath stringByAppendingPathComponent:stringNameWithPNG]; //Add the file name
-    cell.topImage.image = [UIImage imageWithContentsOfFile:filePath];
+    cell.topImage.image = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:filePath]];
  
     return cell;
 }

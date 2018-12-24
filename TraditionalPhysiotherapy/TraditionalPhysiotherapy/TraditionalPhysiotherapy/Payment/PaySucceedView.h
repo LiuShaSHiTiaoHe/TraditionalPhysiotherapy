@@ -13,6 +13,8 @@
 
 -(void)PaySucceedViewRecord;
 
+-(void)PaySucceedViewToUserDetail;
+
 @end
 
 @interface PaySucceedView : UIView

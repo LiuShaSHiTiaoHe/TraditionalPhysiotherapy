@@ -102,7 +102,7 @@
     }
     else
     {
-        headPic.image = [UIImage imageWithContentsOfFile:info.userImage];
+        headPic.image = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:info.userImage]];
     }
 
     nameLabel.text = info.userName;
@@ -140,7 +140,7 @@
     }
     else
     {
-        headPic.image = [UIImage imageWithContentsOfFile:info.technicianImage];
+        headPic.image = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:info.technicianImage]];
     }
     
     nameLabel.text = info.technicianname;

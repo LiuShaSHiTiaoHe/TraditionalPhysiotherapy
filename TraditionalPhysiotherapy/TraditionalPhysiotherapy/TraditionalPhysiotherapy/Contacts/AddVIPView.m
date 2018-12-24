@@ -50,8 +50,8 @@
     
     deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
-    [deleteBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    deleteBtn.titleLabel.font = [UIFont systemFontOfSize:20];
+    [deleteBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    deleteBtn.titleLabel.font = [UIFont systemFontOfSize:26];
     [deleteBtn addTarget:self action:@selector(deleteBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [titleView addSubview:deleteBtn];
     
@@ -73,6 +73,7 @@
     [commiteBtn addTarget:self action:@selector(commiteBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [commiteBtn setBackgroundColor:[UIColor colorWithHexString:@"44e6cd"]];
     [commiteBtn setTitle:@"确定" forState:UIControlStateNormal];
+    commiteBtn.titleLabel.font = [UIFont systemFontOfSize:26];
     [contentView addSubview:commiteBtn];
     
     
@@ -194,11 +195,11 @@
         {
             gender = @"女同学";
         }
-        if (info.userImage)
+        if (![NSObject isNullOrNilWithObject:info.userImage])
         {
-            userImage.image = [UIImage imageWithContentsOfFile:info.userImage];
+            userImage.image = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:info.userImage]];
         }
-        gender = info.userGender;
+//        gender = info.userGender;
         phone = info.userPhone;
         wechat = info.userWechat;
         qqNumber = info.userQQ;
@@ -280,7 +281,9 @@
 #pragma mark UITableVieDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+//    return 10;
+    return 5;
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -506,9 +509,31 @@
 
 -(void)deleteBtnAction
 {
-    [[ContactsDao shareInstanceContactDao] deleteSelectedUserInfo:currentInfo.userId];
-    [[NSNotificationCenter defaultCenter] postNotificationName:UserDataBaseChanged object:nil];
-    [self cancleBtnAction];
+    
+    CKAlertViewController *alertVC = [CKAlertViewController alertControllerWithTitle:@"提示" message:@"确定要删除该会员吗?" ];
+    
+    CKAlertAction *cancel = [CKAlertAction actionWithTitle:@"取消" handler:^(CKAlertAction *action) {
+        NSLog(@"点击了 %@ 按钮",action.title);
+    }];
+    
+    CKAlertAction *sure = [CKAlertAction actionWithTitle:@"确定" handler:^(CKAlertAction *action) {
+        NSLog(@"点击了 %@ 按钮",action.title);
+        
+        [[ContactsDao shareInstanceContactDao] deleteSelectedUserInfo:currentInfo.userId];
+        [[NSNotificationCenter defaultCenter] postNotificationName:UserDataBaseChanged object:nil];
+        [self cancleBtnAction];
+        
+    }];
+    
+    [alertVC addAction:cancel];
+    [alertVC addAction:sure];
+    
+    [[self viewController] presentViewController:alertVC animated:NO completion:nil];
+    
+    
+//    [[ContactsDao shareInstanceContactDao] deleteSelectedUserInfo:currentInfo.userId];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:UserDataBaseChanged object:nil];
+//    [self cancleBtnAction];
 }
 
 
@@ -516,7 +541,40 @@
 {
     if (currentInfo)
     {
+        currentInfo.userName = name;
+        currentInfo.userBirthday = birthDay;
+        currentInfo.userAccountBalance = balance;
+        if ([gender isEqualToString:@"男同学"])
+        {
+            currentInfo.userGender = @"male";
+        }
+        else if([gender isEqualToString:@"女同学"])
+        {
+            currentInfo.userGender = @"female";
+        }
         
+        currentInfo.userPhone = phone;
+        currentInfo.userWechat = wechat;
+        currentInfo.userQQ = qqNumber;
+        currentInfo.userWeight = weight;
+        currentInfo.userHeight = height;
+        currentInfo.userJob = job;
+        
+        currentInfo.userHoroscope = userHoroscope;
+        
+        if (!userHeadImage)
+        {
+            currentInfo.userImage = @"";
+        }
+        else
+        {
+            currentInfo.userImage = userHeadImage;
+        }
+        currentInfo.userAge = userAge;
+        currentInfo.isVIP = @"YES";
+        currentInfo.remark = @"";
+        [[ContactsDao shareInstanceContactDao] updateUserInfo:currentInfo];
+ 
     }
     else
     {
@@ -554,9 +612,12 @@
         info.isVIP = @"YES";
         info.remark = @"";
         [[ContactsDao shareInstanceContactDao] addnewUser:info];
-        [[NSNotificationCenter defaultCenter] postNotificationName:UserDataBaseChanged object:nil];
-        [self cancleBtnAction];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:UserDataBaseChanged object:nil];
+//        [self cancleBtnAction];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:UserDataBaseChanged object:nil];
+    [self cancleBtnAction];
 }
 
 

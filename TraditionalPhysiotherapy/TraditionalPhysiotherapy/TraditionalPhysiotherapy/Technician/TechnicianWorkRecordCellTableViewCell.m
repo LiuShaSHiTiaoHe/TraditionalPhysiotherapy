@@ -22,30 +22,31 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         timeLabel= [[UILabel alloc] init];
-        timeLabel.font = [UIFont systemFontOfSize:18];
+        timeLabel.font = [UIFont systemFontOfSize:26];
         [timeLabel setTextColor:[UIColor darkGrayColor]];
         timeLabel.textAlignment = NSTextAlignmentLeft;
         [timeLabel setBackgroundColor:[UIColor clearColor]];
         [self addSubview:timeLabel];
         
         projectNameLabel = [[UILabel alloc] init];
-        projectNameLabel.font = [UIFont systemFontOfSize:16];
+        projectNameLabel.font = [UIFont systemFontOfSize:26];
         [projectNameLabel setTextColor:[UIColor lightGrayColor]];
         projectNameLabel.textAlignment = NSTextAlignmentLeft;
         [projectNameLabel setBackgroundColor:[UIColor clearColor]];
         [self addSubview:projectNameLabel];
         
         priceLabel = [[UILabel alloc] init];
-        priceLabel.font = [UIFont systemFontOfSize:16];
+        priceLabel.font = [UIFont systemFontOfSize:26];
         [priceLabel setTextColor:[UIColor lightGrayColor]];
         priceLabel.textAlignment = NSTextAlignmentLeft;
         [priceLabel setBackgroundColor:[UIColor clearColor]];
         [self addSubview:priceLabel];
         
         userLabel = [[UILabel alloc] init];
-        userLabel.font = [UIFont systemFontOfSize:16];
+        userLabel.font = [UIFont systemFontOfSize:26];
         [userLabel setTextColor:[UIColor lightGrayColor]];
         userLabel.textAlignment = NSTextAlignmentLeft;
+        userLabel.adjustsFontSizeToFitWidth = YES;
         [userLabel setBackgroundColor:[UIColor clearColor]];
         [self addSubview:userLabel];
         
@@ -53,9 +54,9 @@
         [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.left.equalTo(self.mas_left).offset(20);
-            make.right.equalTo(self.mas_right).offset(-250);
+            make.right.equalTo(self.mas_right).offset(-400);
             make.centerY.equalTo(self.mas_centerY);
-            make.height.equalTo(40);
+            make.height.equalTo(80);
             
         }];
         
@@ -63,24 +64,24 @@
             
             make.left.equalTo(timeLabel.mas_right);
             make.centerY.equalTo(self.mas_centerY);
-            make.height.equalTo(40);
-            make.width.equalTo(100);
+            make.height.equalTo(80);
+            make.width.equalTo(180);
         }];
         
         [priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.width.equalTo(80);
+            make.width.equalTo(180);
             make.left.equalTo(projectNameLabel.mas_right);
             make.centerY.equalTo(self.mas_centerY);
-            make.height.equalTo(40);
+            make.height.equalTo(80);
         }];
         
         [userLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(priceLabel.mas_right);
+            make.left.equalTo(priceLabel.mas_right).offset(-30);
             make.right.equalTo(self.mas_right);
             make.centerY.equalTo(self.mas_centerY);
-            make.height.equalTo(40);
+            make.height.equalTo(80);
         }];
         
     }

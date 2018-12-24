@@ -11,6 +11,9 @@
 #import "PaymentViewController.h"
 #import "MenuViewController.h"
 #import "SettingViewController.h"
+#import "NewSettingViewController.h"
+#import "NewContactsViewController.h"
+#import "NewPaymentViewController.h"
 
 @interface MainViewController ()<UITabBarControllerDelegate>
 
@@ -36,28 +39,33 @@
     [c1.tabBarItem setSelectedImage:[UIImage imageNamed:@"menu_b" imageBundle:@"main"]];
     [c1.tabBarItem setTitlePositionAdjustment:tabbarStringOffset];
     
-    ContactsViewController *c2=[[ContactsViewController alloc]init];
+//    ContactsViewController *c2=[[ContactsViewController alloc]init];
+    NewContactsViewController *c2=[[NewContactsViewController alloc]init];
     c2.tabBarItem.title=@"会员";
     [c2.tabBarItem setImage:[UIImage imageNamed:@"Contacts_g" imageBundle:@"main"]];
     [c2.tabBarItem setSelectedImage:[UIImage imageNamed:@"Contacts_b" imageBundle:@"main"]];
     [c2.tabBarItem setTitlePositionAdjustment:tabbarStringOffset];
     
-    PaymentViewController *c3 = [[PaymentViewController alloc]init];
+//    PaymentViewController *c3 = [[PaymentViewController alloc]init];
+    NewPaymentViewController *c3 = [[NewPaymentViewController alloc]init];
     c3.tabBarItem.title = @"结账";
     [c3.tabBarItem setImage:[UIImage imageNamed:@"Checkout_g" imageBundle:@"main"]];
     [c3.tabBarItem setSelectedImage:[UIImage imageNamed:@"Checkout_b" imageBundle:@"main"]];
     [c3.tabBarItem setTitlePositionAdjustment:tabbarStringOffset];
     
-    SettingViewController *c4 = [[SettingViewController alloc]init];
+    NewSettingViewController *c4 = [[NewSettingViewController alloc]init];
     c4.tabBarItem.title = @"设置";
     [c4.tabBarItem setImage:[UIImage imageNamed:@"Setting_g" imageBundle:@"main"]];
     [c4.tabBarItem setSelectedImage:[UIImage imageNamed:@"Setting_b" imageBundle:@"main"]];
     [c4.tabBarItem setTitlePositionAdjustment:tabbarStringOffset];
     
+    //未选中字体颜色
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor lightGrayColor],NSFontAttributeName:[UIFont systemFontOfSize:22]} forState:UIControlStateNormal];
+    
+    //选中字体颜色
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"4977f1"],NSFontAttributeName:[UIFont systemFontOfSize:22]} forState:UIControlStateSelected];
+    
     self.viewControllers=@[c1,c2,c3,c4];
-    
-
-    
     
 }
 
@@ -66,14 +74,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -30,7 +30,7 @@
         infoText = [[UILabel alloc] init];
         infoText.backgroundColor=[UIColor clearColor];
         infoText.tag = 2;
-        infoText.font = [UIFont systemFontOfSize:16];
+        infoText.font = [UIFont systemFontOfSize:26];
         infoText.textAlignment = NSTextAlignmentCenter;
         infoText.textColor = [UIColor grayColor];
         [self addSubview:infoText];
@@ -40,7 +40,7 @@
         [self addSubview:hLine];
         
         [iconImage mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.mas_top);
+            make.centerY.equalTo(self.mas_centerY).offset(-30);
 //            make.bottom.equalTo(self.mas_bottom).offset(-30);
             make.centerX.equalTo(self.mas_centerX);
             make.width.equalTo(40.);

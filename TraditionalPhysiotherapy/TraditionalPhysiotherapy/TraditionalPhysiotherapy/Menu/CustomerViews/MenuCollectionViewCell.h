@@ -31,6 +31,7 @@
 }
 
 @property (nonatomic, strong) UILabel *name;
+@property (nonatomic,strong)UIImageView *imageView;
 @property (nonatomic, assign) CGPoint buttomRect;
 @property (nonatomic, assign) id<MenuCollectionViewCellDelegate>delegate;
 

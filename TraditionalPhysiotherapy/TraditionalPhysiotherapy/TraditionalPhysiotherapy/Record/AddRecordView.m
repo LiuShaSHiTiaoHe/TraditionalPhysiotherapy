@@ -184,7 +184,10 @@
 -(void)setAddRecordViewInfo:(ContactInfo *)info
 {
     currentInfo = info;
-    headPic.image = [UIImage imageWithContentsOfFile:info.userImage];
+    if (![NSObject isNullOrNilWithObject:info.userImage])
+    {
+        headPic.image = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:info.userImage]];
+    }
     nameLabel.text = info.userName;
     
 }

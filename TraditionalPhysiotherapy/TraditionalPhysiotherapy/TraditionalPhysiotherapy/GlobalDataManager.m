@@ -7,6 +7,8 @@
 //
 
 #import "GlobalDataManager.h"
+#import "MBProgressHUD.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation GlobalDataManager
 
@@ -37,6 +39,88 @@
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     [prefs setObject:code forKey:@"GestureCode"];
     [prefs synchronize];
+}
+
++ (UIImage *)resizeImageByvImage:(UIImage *)srcImage withScale:(double)scale
+{
+    UIImage *inImage = srcImage;
+    NSAssert(inImage, @"error");
+    
+//    NSLog(@"in %@", NSStringFromCGSize(inImage.size));
+    
+    CGImageRef inImageRef = [inImage CGImage];
+    
+    CGDataProviderRef inProvider = CGImageGetDataProvider(inImageRef);
+    CFDataRef inBitmapData       = CGDataProviderCopyData(inProvider);
+    
+    vImage_Buffer inBuffer = {
+        .data     = (void *)CFDataGetBytePtr(inBitmapData),
+        .width    = CGImageGetWidth(inImageRef),
+        .height   = CGImageGetHeight(inImageRef),
+        .rowBytes = CGImageGetBytesPerRow(inImageRef),
+    };
+    
+    
+//    double scaleFactor      = 1.0 / 6.0;
+    double scaleFactor      = scale;
+
+    void *outBytes          = malloc(trunc(inBuffer.height * scaleFactor) * inBuffer.rowBytes);
+    vImage_Buffer outBuffer = {
+        .data     = outBytes,
+        .width    = trunc(inBuffer.width * scaleFactor),
+        .height   = trunc(inBuffer.height * scaleFactor),
+        .rowBytes = inBuffer.rowBytes,
+    };
+    
+    vImage_Error error =
+    vImageScale_ARGB8888(&inBuffer,
+                         &outBuffer,
+                         NULL,
+                         kvImageHighQualityResampling);
+    if (error)
+    {
+        NSLog(@"Error: %ld", error);
+    }
+    
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGContextRef c                = CGBitmapContextCreate(outBuffer.data,
+                                                          outBuffer.width,
+                                                          outBuffer.height,
+                                                          8,
+                                                          outBuffer.rowBytes,
+                                                          colorSpaceRef,
+                                                          kCGImageAlphaNoneSkipLast);
+    CGImageRef outImageRef = CGBitmapContextCreateImage(c);
+    UIImage *outImage      = [UIImage imageWithCGImage:outImageRef];
+    
+    CGImageRelease(outImageRef);
+    CGContextRelease(c);
+    CGColorSpaceRelease(colorSpaceRef);
+    CFRelease(inBitmapData);
+    free(outBytes);
+//    NSLog(@"out %@", NSStringFromCGSize(outImage.size));
+    return outImage;
+}
++ (UIImage *)resizeImageByvImage:(UIImage *)srcImage
+{
+    return [self resizeImageByvImage:srcImage withScale:(1.0 / 6.0)];
+}
+
++ (void)showHUDWithText:(NSString *)message addTo:(UIView *)view dismissDelay:(double) delay animated:(BOOL)animated
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:animated];
+    
+    // Set the text mode to show only text.
+    hud.mode = MBProgressHUDModeText;
+    hud.label.text = message;
+    hud.label.textColor = [UIColor whiteColor];
+    hud.label.font = [UIFont systemFontOfSize:33];
+    hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+    hud.userInteractionEnabled = NO;
+    hud.bezelView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
+    // Move to bottm center.
+    hud.minSize = CGSizeMake(400., 250.);
+    [hud hideAnimated:animated afterDelay:delay];
 }
 
 @end

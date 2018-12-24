@@ -180,7 +180,11 @@
 -(void)setAddRecordViewInfo:(ContactInfo *)info
 {
     currentInfo = info;
-    headPic.image = [UIImage imageWithContentsOfFile:info.userImage];
+    if (![NSObject isNullOrNilWithObject:info.userImage])
+    {
+        headPic.image = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:info.userImage]];
+
+    }
     nameLabel.text = info.userName;
     
 }
@@ -253,7 +257,7 @@
     {
         NSString *stringNameWithPNG = [imageArray objectAtIndex:indexPath.row];
         NSString *filePath = [recordImagePath stringByAppendingPathComponent:stringNameWithPNG]; //Add the file name
-        cell.topImage.image = [UIImage imageWithContentsOfFile:filePath];
+        cell.topImage.image = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:filePath]];
     }
     else
     {
@@ -265,7 +269,7 @@
         {
             NSString *stringNameWithPNG = [imageArray objectAtIndex:indexPath.row];
             NSString *filePath = [recordImagePath stringByAppendingPathComponent:stringNameWithPNG]; //Add the file name
-            cell.topImage.image = [UIImage imageWithContentsOfFile:filePath];
+            cell.topImage.image = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:filePath]];
         }
     }
     return cell;

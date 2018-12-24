@@ -44,9 +44,6 @@
     balanceLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:balanceLabel];
     
- 
-    
-    
     confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     //    [confirmBtn setBackgroundImage:[UIImage imageNamed:@"delete_ico1" imageBundle:@"home2"] forState:UIControlStateNormal];
     [confirmBtn addTarget:self action:@selector(confirmBtnAction) forControlEvents:UIControlEventTouchUpInside];
@@ -94,10 +91,7 @@
         make.height.equalTo(30.);
         
     }];
-    
 
-    
-    
     [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(whiteBackView.mas_left);
         make.bottom.equalTo(whiteBackView.mas_bottom);
@@ -125,18 +119,22 @@
 
 -(void)confirmBtnAction
 {
-    [[MJPopTool sharedInstance] closeAnimated:YES];
+    if (delegate && [delegate respondsToSelector:@selector(PaySucceedViewToUserDetail)])
+    {
+        [delegate PaySucceedViewToUserDetail];
+    }
+    else
+    {
+        [[MJPopTool sharedInstance] closeAnimated:YES];
+    }
 }
 
 -(void)rechargeBtnAction
 {
-
-//    [[MJPopTool sharedInstance] closeAnimated:YES];
     if (delegate)
     {
         [delegate PaySucceedViewRecord];
     }
-    
 }
 
 

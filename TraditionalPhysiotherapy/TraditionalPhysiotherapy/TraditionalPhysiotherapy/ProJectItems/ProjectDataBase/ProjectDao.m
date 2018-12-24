@@ -109,9 +109,14 @@ static ProjectDao *instance = nil;
             module.projectimages = [[NSMutableArray alloc] init];
             [module.projectimages addObjectsFromArray:[imageString componentsSeparatedByString:@","]];
 
-            
-            [userArray addObject:module];
-            
+            if ([module.isdelete isEqualToString:@"1"])
+            {
+                
+            }
+            else
+            {
+                [userArray addObject:module];
+            }
         }
         
     }];
@@ -235,7 +240,11 @@ static ProjectDao *instance = nil;
             NSString *imageString = [rs stringForColumn:@"projectimage"];
             module.projectimages = [[NSMutableArray alloc] init];
             [module.projectimages addObjectsFromArray:[imageString componentsSeparatedByString:@","]];
-            [userArray addObject:module];
+            
+            if (![module.isdelete isEqualToString:@"1"])
+            {
+                [userArray addObject:module];
+            }
 
         }
         

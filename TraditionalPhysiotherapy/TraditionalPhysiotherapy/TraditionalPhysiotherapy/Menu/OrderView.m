@@ -55,7 +55,6 @@
         
         
         totalLabel = [[UILabel alloc] init];
-//        totalLabel.text = @"已选择";
         totalLabel.textAlignment = NSTextAlignmentLeft;
         totalLabel.adjustsFontSizeToFitWidth = YES;
         totalLabel.font = [UIFont systemFontOfSize:22];
@@ -90,9 +89,9 @@
         
         [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.top.equalTo(self.mas_top).offset(60);
-            make.right.equalTo(self.mas_right);
-            make.width.equalTo(400.);
+            make.top.equalTo(self.mas_top).offset(70);
+            make.right.equalTo(self.mas_right).offset(-20);
+            make.width.equalTo(500.);
             make.height.equalTo(470.);
             
         }];
@@ -138,53 +137,62 @@
             make.bottom.equalTo(contentView.mas_bottom).offset(-10.);
         }];
         
-        [cleanCart mas_makeConstraints:^(MASConstraintMaker *make) {
-           
-            make.width.equalTo(100);
-            make.left.equalTo(totalLabel.mas_right).offset(10);
-            make.height.equalTo(50);
-            make.bottom.equalTo(contentView.mas_bottom).offset(-10.);
-        }];
         
         [commiteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.width.equalTo(100);
-            make.left.equalTo(cleanCart.mas_right).offset(10);
+            make.width.equalTo(140);
+            make.right.equalTo(contentView.mas_right).offset(-20);
             make.height.equalTo(50);
             make.bottom.equalTo(contentView.mas_bottom).offset(-10.);
         }];
         
-        NSMutableArray *arr = [OrderRecordInfo shareOrderRecordInfo].projectArray;
-        NSInteger totalPrice = 0;
-        for (NSMutableDictionary *dic in arr)
-        {
-            if ([OrderRecordInfo shareOrderRecordInfo].contactInfo.userId)
-            {
-                NSInteger count = [[dic objectForKey:@"count"] integerValue];
-                ProjectInfo *info = [dic objectForKey:@"info"];
-                NSInteger price = [info.vipprice integerValue];
-                totalPrice = totalPrice + count * price;
-            }
-            else
-            {
-                NSInteger count = [[dic objectForKey:@"count"] integerValue];
-                ProjectInfo *info = [dic objectForKey:@"info"];
-                NSInteger price = [info.projectprice integerValue];
-                totalPrice = totalPrice + count * price;
-            }
-    
-        }
-        totalLabel.text = [NSString stringWithFormat:@"总价:  %ld 元",totalPrice];
+        [cleanCart mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.width.equalTo(140);
+            make.right.equalTo(commiteBtn.mas_left).offset(-20);
+            make.height.equalTo(50);
+            make.bottom.equalTo(contentView.mas_bottom).offset(-10.);
+        }];
+        
+        
+        [self updateTotalMoney];
 
     }
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTotalMoney) name:CartProjectChanged object:nil];
+
     return self;
+}
+
+-(void)updateTotalMoney
+{
+    NSMutableArray *arr = [OrderRecordInfo shareOrderRecordInfo].projectArray;
+    NSInteger totalPrice = 0;
+    for (NSMutableDictionary *dic in arr)
+    {
+        if ([OrderRecordInfo shareOrderRecordInfo].contactInfo.userId)
+        {
+            NSInteger count = [[dic objectForKey:@"count"] integerValue];
+            ProjectInfo *info = [dic objectForKey:@"info"];
+            NSInteger price = [info.vipprice integerValue];
+            totalPrice = totalPrice + count * price;
+        }
+        else
+        {
+            NSInteger count = [[dic objectForKey:@"count"] integerValue];
+            ProjectInfo *info = [dic objectForKey:@"info"];
+            NSInteger price = [info.projectprice integerValue];
+            totalPrice = totalPrice + count * price;
+        }
+        
+    }
+    totalLabel.text = [NSString stringWithFormat:@"总价:  %ld 元",totalPrice];
 }
 
 -(void)cleanCartAction
 {
     [[OrderRecordInfo shareOrderRecordInfo].projectArray removeAllObjects];
     [[NSNotificationCenter defaultCenter] postNotificationName:CartProjectChanged object:nil];
+    totalLabel.text = @"";
     [infoTableView reloadData];
 
 }
@@ -224,10 +232,8 @@
     {
         cell = [[ProjectListTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellWithIdentifier];
     }
-//    cell.delegate = self;
-//    [self setCellUI:indexPath.row withCell:cell];
+
     NSMutableDictionary *dic = [[OrderRecordInfo shareOrderRecordInfo].projectArray objectAtIndex:indexPath.row];
-//    ProjectInfo *info = [dic objectForKey:@"info"];
     [cell setProjectListInfo:dic];
     return cell;
 }

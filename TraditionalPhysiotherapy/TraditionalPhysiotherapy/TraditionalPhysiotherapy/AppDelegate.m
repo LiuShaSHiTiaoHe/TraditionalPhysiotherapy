@@ -23,23 +23,12 @@
 
     [self createDir];
     [DataBaseQueue createAllTable];
-//    
-//    NSArray *familyNames = [UIFont familyNames];
-//    for( NSString *familyName in familyNames )
-//    {
-//        NSArray *fontNames = [UIFont fontNamesForFamilyName:familyName];
-//        for( NSString *fontName in fontNames )
-//        {
-//            printf( "\tFont: %s \n", [fontName UTF8String] );
-//        }
-//    }
-
+//    [[LLDebugTool sharedTool] startWorking];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     MainViewController *mainVC = [[MainViewController alloc] init];
     BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:mainVC];
     [self.window setRootViewController:nav];
     
-//    [application setStatusBarStyle:UIStatusBarStyleLightContent];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
     [self.window makeKeyAndVisible];

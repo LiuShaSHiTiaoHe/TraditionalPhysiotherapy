@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '77302A9D9EC7E9EBE63DF57B04B78CF4'
-               BlueprintName = 'EasyShowView'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libEasyShowView.a'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C013E5730D56CDA2AA7BFE5527B212DA"
+               BlueprintName = "EasyShowView"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "libEasyShowView.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

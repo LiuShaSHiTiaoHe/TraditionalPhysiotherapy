@@ -182,7 +182,10 @@
 -(void)setViewContactInfo:(ContactInfo *)info
 {
     curentInfo = info;
-    headPic.image = [UIImage imageWithContentsOfFile:info.userImage];
+    if (![NSObject isNullOrNilWithObject:info.userImage])
+    {
+        headPic.image = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:info.userImage]];
+    }
     nameLabel.text = info.userName;
     balanceLabel.text = [NSString stringWithFormat:@"余额:     %@ 元",info.userAccountBalance];
 }

@@ -142,7 +142,7 @@
                 cell.userName.text = currentInfo.userName;
                 if (![NSObject isNullOrNilWithObject:currentInfo.userImage])
                 {
-                    cell.headImage.image = [UIImage imageWithContentsOfFile:currentInfo.userImage];
+                    cell.headImage.image = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:currentInfo.userImage]];
                 }
                 else
                 {

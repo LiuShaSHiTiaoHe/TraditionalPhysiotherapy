@@ -24,7 +24,7 @@
         detailText = [[UILabel alloc] init];
         detailText.backgroundColor=[UIColor clearColor];
         detailText.tag = 1;
-        detailText.font = [UIFont systemFontOfSize:28];//FZKTJW--GB1-0
+        detailText.font = [UIFont systemFontOfSize:24];//FZKTJW--GB1-0
         detailText.textAlignment = NSTextAlignmentCenter;
         detailText.textColor = [UIColor lightGrayColor];
         [self addSubview:detailText];
@@ -32,7 +32,7 @@
         infoText = [[UILabel alloc] init];
         infoText.backgroundColor=[UIColor clearColor];
         infoText.tag = 2;
-        infoText.font = [UIFont systemFontOfSize:18];
+        infoText.font = [UIFont systemFontOfSize:24];
         infoText.textAlignment = NSTextAlignmentCenter;
         infoText.textColor = [UIColor grayColor];
         [self addSubview:infoText];

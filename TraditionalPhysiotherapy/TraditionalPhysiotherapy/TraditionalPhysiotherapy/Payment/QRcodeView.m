@@ -83,7 +83,7 @@
     
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.mas_top).offset(60.);
+        make.top.equalTo(self.mas_top).offset(120.);
         make.centerX.equalTo(self.mas_centerX);
         make.width.equalTo(800.);
         make.height.equalTo(500.);

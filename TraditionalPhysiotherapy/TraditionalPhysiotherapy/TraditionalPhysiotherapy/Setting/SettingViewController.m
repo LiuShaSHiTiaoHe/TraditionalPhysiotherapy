@@ -70,12 +70,6 @@
     }
     if(indexPath.section == 0 &&indexPath.row == 2)
     {
-//        editProjectView = [[EditProject alloc] init];
-//        [contentView addSubview:editProjectView];
-//        [editProjectView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.edges.equalTo(contentView.contentScrollView);
-//
-//        }];
         [self loadEditProjectView];
     }
     if(indexPath.section == 1 &&indexPath.row == 0)
@@ -273,11 +267,13 @@
     {
         if (path.length < 4)
         {
-            my_hud.mode = MBProgressHUDModeText;
-            my_hud.labelText = @"请至少链接四个点!";
-            [my_hud show:YES];
-            [self.view addSubview:my_hud];
-            [my_hud hide:YES afterDelay:2];
+//            my_hud.mode = MBProgressHUDModeText;
+//            my_hud.labelText = @"请至少链接四个点!";
+//            [my_hud show:YES];
+//            [self.view addSubview:my_hud];
+//            [my_hud hide:YES afterDelay:2];
+            [GlobalDataManager showHUDWithText:@"请至少链接四个点!" addTo:self.view dismissDelay:2. animated:YES];
+
             [self clearDraw];
         }
         else

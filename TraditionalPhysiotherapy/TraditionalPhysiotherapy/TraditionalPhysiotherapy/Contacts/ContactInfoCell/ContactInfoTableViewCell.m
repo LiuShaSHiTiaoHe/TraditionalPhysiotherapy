@@ -96,7 +96,7 @@
     }
     else
     {
-        headPic.image = [UIImage imageWithContentsOfFile:entity.userImage];
+        headPic.image = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:entity.userImage]];
     }
    
     nameLabel.text = entity.userName;

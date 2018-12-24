@@ -25,6 +25,7 @@
 @implementation MenuCollectionViewCell
 @synthesize name,buttomRect;
 @synthesize delegate;
+@synthesize imageView;
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -183,11 +184,11 @@
     vippriceLabel.text = [NSString stringWithFormat:@"会员 %@ ",info.vipprice];
 
 //    _datas = info.projectimages;
-    if (info.projectimages.count > 0)
-    {
-        NSString *filePath = [projectPicPath stringByAppendingPathComponent:[info.projectimages objectAtIndex:0]];
-        imageView.image = [UIImage imageWithContentsOfFile:filePath];
-    }
+//    if (info.projectimages.count > 0)
+//    {
+//        NSString *filePath = [projectPicPath stringByAppendingPathComponent:[info.projectimages objectAtIndex:0]];
+//        imageView.image = [UIImage imageWithContentsOfFile:filePath];
+//    }
 //    _pageControl.numberOfPages = _datas.count;
 //    [_pagerView reloadData];
 }

@@ -36,20 +36,39 @@
 + (UIImage *)imageNamed:(NSString *)imageName imageBundle:(NSString *)bundle
 {
     
-    NSString *name = [[bundle stringByAppendingPathExtension:@"bundle"] stringByAppendingPathComponent:imageName];
+//    NSString *name = [[bundle stringByAppendingPathExtension:@"bundle"] stringByAppendingPathComponent:imageName];
+//    return [UIImage imageNamed:name];
+
+    UIImage *image = nil;
     
-    return [UIImage imageNamed:name];
+    NSString *image_name = [NSString stringWithFormat:@"%@", imageName];
+    NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
+    NSString *bundlePath = [resourcePath stringByAppendingPathComponent:[bundle stringByAppendingPathExtension:@"bundle"]];
+    NSString *image_path = [bundlePath stringByAppendingPathComponent:image_name];;
+    image = [[UIImage alloc] initWithContentsOfFile:image_path];
+    
+    return image;
+    
 }
 
 //view 转image
 + (UIImage *)getImageViewWithView:(UIView *)view
 {
-    UIGraphicsBeginImageContext(view.frame.size);
-    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:NO];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsBeginImageContext(view.frame.size);
+//    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:NO];
+//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    return image;
+    
+    UIImage *imageRet = [[UIImage alloc]init];
+    //UIGraphicsBeginImageContextWithOptions(区域大小, 是否是非透明的, 屏幕密度);
+    UIGraphicsBeginImageContextWithOptions(view.frame.size, YES, [UIScreen mainScreen].scale);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    imageRet = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    return image;
+    return imageRet;
+    
 }
 
 //图像模糊

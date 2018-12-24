@@ -22,4 +22,6 @@
 -(ContactInfo *)getUserInfo:(NSString *)userId;
 
 -(void)deleteSelectedUserInfo:(NSString *)userId;
+-(void)updateUserInfo:(ContactInfo *)userInfo;
+
 @end
