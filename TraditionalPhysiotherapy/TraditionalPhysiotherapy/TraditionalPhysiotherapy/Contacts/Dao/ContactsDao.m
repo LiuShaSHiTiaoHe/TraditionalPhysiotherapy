@@ -231,7 +231,11 @@ static ContactsDao *instance = nil;
     FMDatabaseQueue *queue = [DataBaseQueue shareInstance];
     [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
         
-        [db executeUpdate:@"delete from USER  where userId = ?",userId];
+        NSString *uuidString = userId;
+        [db executeUpdate:@"update USER set ISDELETE = ? where userId = ?" ,
+                          @"1",
+                          uuidString
+                          ];
         
     }];
 }

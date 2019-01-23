@@ -13,6 +13,7 @@
 #import "NewAddProjectViewController.h"
 #import "NewEditProjectController.h"
 #import "NewTechnicianSetViewController.h"
+#import "NewEditProjectSectionController.h"
 
 @interface NewSettingViewController ()
 
@@ -37,7 +38,7 @@
 #pragma mark - UICollectionViewDelegate + UICollectionViewDelegate + UICollectionViewDelegateFlowLayout
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 4;
+    return 5;
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -64,17 +65,23 @@
             break;
         case 1:
         {
+            cell.nameLabel.text  =@"编辑类别";
+            cell.imageView.image = [UIImage imageNamed:@"333" imageBundle:@"Menu"];
+        }
+            break;
+        case 2:
+        {
             cell.nameLabel.text  =@"添加项目";
             cell.imageView.image = [UIImage imageNamed:@"222" imageBundle:@"Menu"];
         }
             break;
-        case 2:
+        case 3:
         {
             cell.nameLabel.text  =@"编辑项目";
             cell.imageView.image = [UIImage imageNamed:@"333" imageBundle:@"Menu"];
         }
             break;
-        case 3:
+        case 4:
         {
             cell.nameLabel.text  =@"技师管理";
             cell.imageView.image = [UIImage imageNamed:@"123" imageBundle:@"Menu"];
@@ -90,13 +97,17 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake((UIScreenWidth-400)/2, 360);
+//    return CGSizeMake((UIScreenWidth-400)/2, 360);
+    return CGSizeMake((UIScreenWidth-400)/3, 360);
+
 }
 
 //设置每个item的UIEdgeInsets
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(30, 120, 30, 120);
+//    return UIEdgeInsetsMake(30, 120, 30, 120);
+    return UIEdgeInsetsMake(30, 100, 30, 100);
+
 }
 
 //每个cell的距离
@@ -123,17 +134,23 @@
             break;
         case 1:
         {
-            NewAddProjectViewController *temp = [[NewAddProjectViewController alloc] init];
+            NewEditProjectSectionController *temp = [[NewEditProjectSectionController alloc] init];
             [self.navigationController pushViewController:temp animated:YES];
         }
             break;
         case 2:
         {
-            NewEditProjectController *temp = [[NewEditProjectController alloc] init];
+            NewAddProjectViewController *temp = [[NewAddProjectViewController alloc] init];
             [self.navigationController pushViewController:temp animated:YES];
         }
             break;
         case 3:
+        {
+            NewEditProjectController *temp = [[NewEditProjectController alloc] init];
+            [self.navigationController pushViewController:temp animated:YES];
+        }
+            break;
+        case 4:
         {
             NewTechnicianSetViewController *temp = [[NewTechnicianSetViewController alloc] init];
             [self.navigationController pushViewController:temp animated:YES];
@@ -144,50 +161,5 @@
     }
     
 }
-
-//- (UICollectionReusableView *) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-//{
-//    TitleCollectionReusableView *reusableview = nil;
-//
-//    if (kind == UICollectionElementKindSectionHeader)
-//    {
-//        reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"TitleCollectionReusableView" forIndexPath:indexPath];
-//
-//        if (indexPath.section == 2)
-//        {
-//            reusableview.titlelabel.text = @"联系方式";
-//        }
-//        else if (indexPath.section == 3)
-//        {
-//            reusableview.titlelabel.text = @"基本资料";
-//        }
-//        else
-//        {
-//            reusableview.titlelabel.text = @"";
-//        }
-//
-//    }
-//
-//    return reusableview;
-//
-//}
-
-//// 设置section头视图的参考大小，与tableheaderview类似
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout
-//referenceSizeForHeaderInSection:(NSInteger)section
-//{
-//    if (section == 0)
-//    {
-//        return CGSizeMake(0, 0);
-//    }
-//    else if (section == 1)
-//    {
-//        return CGSizeMake(UIScreenWidth-450, 30.);
-//    }
-//    else
-//    {
-//        return CGSizeMake(UIScreenWidth-450, 60.);
-//    }
-//}
 
 @end

@@ -43,7 +43,16 @@ static ProjectDao *instance = nil;
             module.isdelete = [rs stringForColumn:@"isdelete"];
             module.sectionid = [rs stringForColumn:@"sectionid"];
            
-            [userArray addObject:module];
+            if ([module.isdelete isEqualToString:@"1"])
+            {
+                
+            }
+            else
+            {
+                [userArray addObject:module];
+            }
+            
+//            [userArray addObject:module];
             
         }
         

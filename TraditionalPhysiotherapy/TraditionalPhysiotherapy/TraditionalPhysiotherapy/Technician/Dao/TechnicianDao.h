@@ -17,4 +17,5 @@
 
 -(void)addNewTechnichian:(TechnicianInfo *)info;
 -(void)updateTechnichian:(TechnicianInfo *)info;
+-(void)deletTechnician:(NSString *)techID;
 @end

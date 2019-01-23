@@ -49,6 +49,13 @@
     [cancleBtn addTarget:self action:@selector(cancleBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [titleView addSubview:cancleBtn];
     
+    deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
+    [deleteBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    deleteBtn.titleLabel.font = [UIFont systemFontOfSize:26];
+    [deleteBtn addTarget:self action:@selector(deleteBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [titleView addSubview:deleteBtn];
+    
     
     userImage = [[UIImageView alloc] init];
     userImage.image = [UIImage imageNamed:@"addUserImage" imageBundle:@"contact"];
@@ -107,6 +114,15 @@
         make.height.equalTo(30.);
     }];
     
+    [deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(titleView.mas_left).offset(20.);
+        make.centerY.equalTo(titleView.mas_centerY);
+        make.width.equalTo(80);
+        make.height.equalTo(80/3);
+    }];
+    
+    
     [cancleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(titleView.mas_right).offset(-20.);
@@ -160,6 +176,7 @@
         phone = @"";
         mark = @"";
         titleLabel.text = @"添加技师";
+        deleteBtn.hidden = YES;
     }
     else
     {
@@ -201,9 +218,38 @@
         phone = info.technicianPhone;
         mark = info.remark;
         titleLabel.text = @"编辑技师";
-
+        deleteBtn.hidden = NO;
     }
 }
+
+-(void)deleteBtnAction
+{
+    
+    CKAlertViewController *alertVC = [CKAlertViewController alertControllerWithTitle:@"提示" message:@"确定要删除该人员吗?" ];
+    
+    CKAlertAction *cancel = [CKAlertAction actionWithTitle:@"取消" handler:^(CKAlertAction *action) {
+        NSLog(@"点击了 %@ 按钮",action.title);
+    }];
+    
+    CKAlertAction *sure = [CKAlertAction actionWithTitle:@"确定" handler:^(CKAlertAction *action) {
+        NSLog(@"点击了 %@ 按钮",action.title);
+        
+        [[TechnicianDao shareInstanceTechnicianDao] deletTechnician:currentInfo.technicianid];
+//        [[ContactsDao shareInstanceContactDao] deleteSelectedUserInfo:currentInfo.userId];
+        [[NSNotificationCenter defaultCenter] postNotificationName:TechnicianDataBaseChange object:nil];
+//        [[self viewController].navigationController popViewControllerAnimated:YES];
+        [self cancleBtnAction];
+
+    }];
+    
+    [alertVC addAction:cancel];
+    [alertVC addAction:sure];
+    
+    [[self viewController] presentViewController:alertVC animated:NO completion:nil];
+
+}
+
+
 
 #pragma mark UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

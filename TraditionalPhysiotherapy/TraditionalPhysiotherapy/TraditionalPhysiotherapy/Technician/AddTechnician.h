@@ -22,7 +22,8 @@
     UILabel *titleLabel;
     UIButton *cancleBtn;
     UIButton *commiteBtn;
-    
+    UIButton *deleteBtn;
+
     UIImageView *userImage;
     
     UITableView *infoTableView;

@@ -130,7 +130,20 @@ static TechnicianDao *instance = nil;
 }
 
 
-
+-(void)deletTechnician:(NSString *)techID
+{
+    FMDatabaseQueue *queue = [DataBaseQueue shareInstance];
+    [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        
+        NSString *uuidString = techID;
+        
+        [db executeUpdate:@"update Technician set ISDELETE = ? where technicianid = ?" ,
+         @"1",
+         uuidString
+         ];
+        
+    }];
+}
 
 
 - (NSString *)uuidString

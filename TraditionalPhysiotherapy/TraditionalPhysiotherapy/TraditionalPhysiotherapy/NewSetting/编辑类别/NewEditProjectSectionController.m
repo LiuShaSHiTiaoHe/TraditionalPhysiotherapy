@@ -1,25 +1,26 @@
 //
-//  NewEditProjectController.m
+//  NewEditProjectSectionController.m
 //  TraditionalPhysiotherapy
 //
-//  Created by GuGuiJun on 2018/12/12.
+//  Created by GuGuiJun on 2018/12/24.
 //  Copyright © 2018 Gu GuiJun. All rights reserved.
 //
 
-#import "NewEditProjectController.h"
+#import "NewEditProjectSectionController.h"
 #import "ProjectDao.h"
 #import "ProjectSectionInfo.h"
 #import "ProjectInfo.h"
 #import "NewEditProjectContentViewController.h"
 
-@interface NewEditProjectController ()<UITableViewDelegate,UITableViewDataSource>
+@interface NewEditProjectSectionController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UITableView *editTableView;
     NSMutableArray *currentArray;
 }
+
 @end
 
-@implementation NewEditProjectController
+@implementation NewEditProjectSectionController
 
 - (void)viewDidLoad
 {
@@ -35,14 +36,7 @@
 {
     [currentArray removeAllObjects];
     NSMutableArray *sectionArray = [[ProjectDao shareInstanceProjectDao] getAllSection];
-    for (ProjectSectionInfo *info in sectionArray)
-    {
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        NSMutableArray *projectArray = [[ProjectDao shareInstanceProjectDao] getProjectWithId:info.sectionid];
-        [dic setObject:projectArray forKey:@"ProjectArray"];
-        [dic setObject:info forKey:@"SectionInfo"];
-        [currentArray addObject:dic];
-    }
+    [currentArray addObjectsFromArray:sectionArray];
     [editTableView reloadData];
 }
 
@@ -63,7 +57,7 @@
     [myNavView addSubview:backButton];
     
     UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.text = @"编辑项目";
+    titleLabel.text = @"编辑类别";
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont systemFontOfSize:30];
@@ -119,7 +113,7 @@
         make.bottom.equalTo(self.view.mas_bottom);
         
     }];
-
+    
 }
 
 -(void)backBtnAction
@@ -131,8 +125,7 @@
 #pragma mark UITableVieDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSMutableArray *projectArray = [[currentArray objectAtIndex:section] objectForKey:@"ProjectArray"];
-    return projectArray.count;
+    return currentArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -143,28 +136,18 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellWithIdentifier];
     }
-    NSMutableArray *projectArray = [[currentArray objectAtIndex:indexPath.section] objectForKey:@"ProjectArray"];
-    ProjectInfo *info = [projectArray objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text = info.projectname;
+    ProjectSectionInfo *info = [currentArray objectAtIndex:indexPath.row];
+    cell.detailTextLabel.text = info.sectionname;
     cell.detailTextLabel.font = [UIFont systemFontOfSize:30];
     cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"4977f1"];
-//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"info" imageBundle:@"Project"]];
-//    if ([info.isdelete isEqualToString:@"0"])
-//    {
-//        [cell.mySwitch setOn:YES];
-//    }
-//    else
-//    {
-//        [cell.mySwitch setOn:NO];
-//    }
-//    [cell.mySwitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
     return cell;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return currentArray.count;
+    return 1;
 }
 
 
@@ -172,18 +155,6 @@
 {
     return 100.;
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 60.;
-}
-
-- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    ProjectSectionInfo *info = [[currentArray objectAtIndex:section] objectForKey:@"SectionInfo"];
-    return info.sectionname;
-}
-
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -195,21 +166,6 @@
     [self.navigationController pushViewController:temp animated:YES];
 }
 
-- (void)switchAction:(id)sender
-{
-    //获取点击按钮对应的cell
-    UISwitch *switchInCell = (UISwitch *)sender;
-    //UISwitch的superview就是cell
-    UITableViewCell * cell = (UITableViewCell*) switchInCell.superview;
-    NSIndexPath * indexPath = [editTableView indexPathForCell:cell];
-    NSMutableArray *projectArray = [[currentArray objectAtIndex:indexPath.section] objectForKey:@"ProjectArray"];
-    ProjectInfo *info = [projectArray objectAtIndex:indexPath.row];
-    NSString *isdelete = @"0";
-    if (!switchInCell.isOn)
-    {
-        isdelete = @"1";
-    }
-    [[ProjectDao shareInstanceProjectDao] updateProject:info.projectid andState:isdelete];
-}
+
 
 @end

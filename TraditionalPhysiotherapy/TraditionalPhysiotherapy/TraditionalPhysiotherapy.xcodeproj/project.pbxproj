@@ -103,6 +103,7 @@
 		6972763F1FE25219001BA281 /* HeadCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6972763E1FE25219001BA281 /* HeadCollectionViewCell.m */; };
 		6983BC0720A836AA00571AEB /* EditRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983BC0620A836AA00571AEB /* EditRecordView.m */; };
 		6983BC0A20A85C2200571AEB /* ReViewPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983BC0920A85C2200571AEB /* ReViewPhotoView.m */; };
+		698E4A5521D0C5FE00E0C892 /* NewEditProjectSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 698E4A5421D0C5FE00E0C892 /* NewEditProjectSectionController.m */; };
 		69A0645920288B34002884F8 /* PaySucceedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A0645820288B34002884F8 /* PaySucceedView.m */; };
 		69A0645D20289175002884F8 /* AddRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A0645C20289175002884F8 /* AddRecordView.m */; };
 		69A0646020289A27002884F8 /* RecordDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A0645F20289A27002884F8 /* RecordDao.m */; };
@@ -463,6 +464,8 @@
 		6983BC0620A836AA00571AEB /* EditRecordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditRecordView.m; sourceTree = "<group>"; };
 		6983BC0820A85C2200571AEB /* ReViewPhotoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReViewPhotoView.h; sourceTree = "<group>"; };
 		6983BC0920A85C2200571AEB /* ReViewPhotoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReViewPhotoView.m; sourceTree = "<group>"; };
+		698E4A5321D0C5FE00E0C892 /* NewEditProjectSectionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewEditProjectSectionController.h; sourceTree = "<group>"; };
+		698E4A5421D0C5FE00E0C892 /* NewEditProjectSectionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewEditProjectSectionController.m; sourceTree = "<group>"; };
 		69A0645720288B34002884F8 /* PaySucceedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaySucceedView.h; sourceTree = "<group>"; };
 		69A0645820288B34002884F8 /* PaySucceedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaySucceedView.m; sourceTree = "<group>"; };
 		69A0645B20289175002884F8 /* AddRecordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRecordView.h; sourceTree = "<group>"; };
@@ -794,6 +797,7 @@
 				690C874F21BE5DFC00A9076F /* NewSettingViewController.m */,
 				690C875421BE5FBE00A9076F /* SettingCollectionViewCell.h */,
 				690C875521BE5FBE00A9076F /* SettingCollectionViewCell.m */,
+				698E4A5221D0C59900E0C892 /* 编辑类别 */,
 				69E1A1A021C1076300736ACA /* 技师管理 */,
 				69E1A19621C0A22800736ACA /* 编辑项目 */,
 				69E1A0B721BF8C7500736ACA /* 添加项目 */,
@@ -1199,6 +1203,15 @@
 				69F6D44720273C7D00F099BF /* SelectContactCell.m */,
 			);
 			path = ContactInfoCell;
+			sourceTree = "<group>";
+		};
+		698E4A5221D0C59900E0C892 /* 编辑类别 */ = {
+			isa = PBXGroup;
+			children = (
+				698E4A5321D0C5FE00E0C892 /* NewEditProjectSectionController.h */,
+				698E4A5421D0C5FE00E0C892 /* NewEditProjectSectionController.m */,
+			);
+			path = "编辑类别";
 			sourceTree = "<group>";
 		};
 		69A0645A202890B6002884F8 /* Record */ = {
@@ -2048,6 +2061,7 @@
 				696558DD2008AB7F00D3F575 /* RTVideoIconView.m in Sources */,
 				69E1A16F21BF9C7100736ACA /* MWTapDetectingImageView.m in Sources */,
 				69ED0FD62029B7E7001D9392 /* UnlockView.m in Sources */,
+				698E4A5521D0C5FE00E0C892 /* NewEditProjectSectionController.m in Sources */,
 				69E1A18121BF9C7100736ACA /* PSTGridLayoutItem.m in Sources */,
 				69E1A18421BF9C7100736ACA /* UIButton+EMWebCache.m in Sources */,
 				696558DB2008AB7F00D3F575 /* RTImagePickerUtils.m in Sources */,
@@ -2377,7 +2391,7 @@
 				PRODUCT_NAME = "家传古方";
 				PROVISIONING_PROFILE = "12b77f95-e541-490c-b09a-da208db11096";
 				PROVISIONING_PROFILE_SPECIFIER = 123123123123;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -2401,7 +2415,7 @@
 				PRODUCT_NAME = "家传古方";
 				PROVISIONING_PROFILE = "12b77f95-e541-490c-b09a-da208db11096";
 				PROVISIONING_PROFILE_SPECIFIER = 123123123123;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

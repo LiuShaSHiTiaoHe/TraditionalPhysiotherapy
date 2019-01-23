@@ -59,13 +59,20 @@
     [c4.tabBarItem setSelectedImage:[UIImage imageNamed:@"Setting_b" imageBundle:@"main"]];
     [c4.tabBarItem setTitlePositionAdjustment:tabbarStringOffset];
     
-    //未选中字体颜色
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor lightGrayColor],NSFontAttributeName:[UIFont systemFontOfSize:22]} forState:UIControlStateNormal];
+    UITabBarItem *item = [UITabBarItem appearanceWhenContainedInInstancesOfClasses:@[self.class]];
     
-    //选中字体颜色
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"4977f1"],NSFontAttributeName:[UIFont systemFontOfSize:22]} forState:UIControlStateSelected];
+    [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightGrayColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Helvetica" size:20.0f],NSFontAttributeName,nil] forState:UIControlStateNormal];
+    [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithHexString:@"4977f1"], NSForegroundColorAttributeName, [UIFont fontWithName:@"Helvetica" size:26.0f],NSFontAttributeName,nil] forState:UIControlStateSelected];
+
+//    //未选中字体颜色
+//    [item setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor lightGrayColor],NSFontAttributeName:[UIFont systemFontOfSize:20]} forState:UIControlStateNormal];
+//
+//    //选中字体颜色
+//    [item setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"4977f1"],NSFontAttributeName:[UIFont systemFontOfSize:26]} forState:UIControlStateSelected];
     
     self.viewControllers=@[c1,c2,c3,c4];
+    
+    [self setSelectedIndex:0];
     
 }
 
