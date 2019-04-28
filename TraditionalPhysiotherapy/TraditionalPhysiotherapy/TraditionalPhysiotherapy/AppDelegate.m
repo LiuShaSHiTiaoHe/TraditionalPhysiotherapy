@@ -21,9 +21,8 @@
 {
     // Override point for customization after application launch.
 
-    [self createDir];
+    [DataBaseQueue createDir];
     [DataBaseQueue createAllTable];
-//    [[LLDebugTool sharedTool] startWorking];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     MainViewController *mainVC = [[MainViewController alloc] init];
     BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:mainVC];
@@ -36,35 +35,6 @@
     
     
     return YES;
-}
--(void)createDir
-{
-    if (![[NSFileManager defaultManager] fileExistsAtPath:userDocumentPath])
-    {
-        [[NSFileManager defaultManager] createDirectoryAtPath:userDocumentPath withIntermediateDirectories:NO attributes:nil error:nil];
-    }
-    if (![[NSFileManager defaultManager] fileExistsAtPath:userHeadPicPath])
-    {
-        [[NSFileManager defaultManager] createDirectoryAtPath:userHeadPicPath withIntermediateDirectories:NO attributes:nil error:nil];
-    }
-    if (![[NSFileManager defaultManager] fileExistsAtPath:projectPicPath])
-    {
-        [[NSFileManager defaultManager] createDirectoryAtPath:projectPicPath withIntermediateDirectories:NO attributes:nil error:nil];
-    }
-    if (![[NSFileManager defaultManager] fileExistsAtPath:userSignPath])
-    {
-        [[NSFileManager defaultManager] createDirectoryAtPath:userSignPath withIntermediateDirectories:NO attributes:nil error:nil];
-    }
-    if (![[NSFileManager defaultManager] fileExistsAtPath:recordImagePath])
-    {
-        [[NSFileManager defaultManager] createDirectoryAtPath:recordImagePath withIntermediateDirectories:NO attributes:nil error:nil];
-    }
-    
-    [[NSFileManager defaultManager] removeItemAtPath:tempFilePath error:nil];
-    [[NSFileManager defaultManager] createDirectoryAtPath:tempFilePath withIntermediateDirectories:NO attributes:nil error:nil];
-
-    NSLog(@"userDocumentPath__path:%@",userDocumentPath);
-    NSLog(@"userHeadPicPath__path:%@",userHeadPicPath);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

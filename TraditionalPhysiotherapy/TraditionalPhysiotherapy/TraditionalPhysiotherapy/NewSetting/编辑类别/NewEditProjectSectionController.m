@@ -159,11 +159,11 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSMutableArray *projectArray = [[currentArray objectAtIndex:indexPath.section] objectForKey:@"ProjectArray"];
-    ProjectInfo *info = [projectArray objectAtIndex:indexPath.row];
-    NewEditProjectContentViewController *temp = [[NewEditProjectContentViewController alloc] init];
-    temp.currentInfo = info;
-    [self.navigationController pushViewController:temp animated:YES];
+//    NSMutableArray *projectArray = [[currentArray objectAtIndex:indexPath.section] objectForKey:@"ProjectArray"];
+//    ProjectInfo *info = [projectArray objectAtIndex:indexPath.row];
+//    NewEditProjectContentViewController *temp = [[NewEditProjectContentViewController alloc] init];
+//    temp.currentInfo = info;
+//    [self.navigationController pushViewController:temp animated:YES];
 }
 
 

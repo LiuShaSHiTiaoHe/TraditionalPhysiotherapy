@@ -14,6 +14,7 @@
 +(ProjectDao *)shareInstanceProjectDao;
 -(NSMutableArray *)getAllSection;
 -(void)addNewSection:(NSDictionary *)dic;
+-(void)updateSection:(NSDictionary *)dic;
 -(void)updateProjectSection:(NSString *)sectiontId andState:(NSString *)isdelete;
 
 

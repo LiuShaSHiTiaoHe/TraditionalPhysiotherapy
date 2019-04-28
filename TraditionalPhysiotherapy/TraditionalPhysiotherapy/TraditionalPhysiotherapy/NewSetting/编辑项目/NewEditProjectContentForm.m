@@ -98,7 +98,10 @@ typedef void(^GenderSelectCompletion)(NSInteger index);
     for (NSString *imagePath in projectInfo.projectimages)
     {
         NSString *filePath = [projectPicPath stringByAppendingPathComponent:imagePath]; //Add the file name
-        [tempImages addObject:[GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:filePath]]];
+        NSLog(@"original filePath is %@",filePath);
+//        [tempImages addObject:[GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:filePath]]];
+        [tempImages addObject:[UIImage imageWithContentsOfFile:filePath]];
+
     }
     image.images = tempImages;
     [items addObject:image];
@@ -110,9 +113,12 @@ typedef void(^GenderSelectCompletion)(NSInteger index);
     
     __weak typeof(self) weakSelf = self;
     self.genderSelectCompletion = ^(NSInteger index) {
+        
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+
         if (index!=0)
         {
-            gender.info = sectionNameArray[index-1];
+            gender.info = strongSelf->sectionNameArray[index-1];
             [weakSelf.formTableView reloadData];
         }
     };
@@ -124,11 +130,43 @@ typedef void(^GenderSelectCompletion)(NSInteger index);
         // 这里只是简单描述校验逻辑，可根据自身需求封装数据校验逻辑
         [SWFormHandler sw_checkFormNullDataWithWithDatas:weakSelf.mutableItems success:^{
             
-            NSLog(@"selectImages === %@", image.selectImages);
-            //NSLog(@"images === %@", image.images);
-            NSLog(@"gender === %@", gender.info);
-            NSLog(@"name === %@", name.info);
+            __strong __typeof(weakSelf)strongSelf = weakSelf;
             
+            long long time_stamp_now = [[NSDate date] timeIntervalSince1970];
+            NSNumber *longlongNumber = [NSNumber numberWithLongLong:time_stamp_now];
+            NSString *time_stamp_string = [longlongNumber stringValue];
+            
+            for (NSInteger i = 0;i< image.selectImages.count;i++)
+            {
+                UIImage *simage = image.selectImages[i];
+                NSString *stringNameWithPNG = [NSString stringWithFormat:@"%@_%ld.png",time_stamp_string,i];
+                [weakSelf savescanresultimage:simage imagename:[NSString stringWithFormat:@"%@_%ld",time_stamp_string,i]];
+                [strongSelf->imageArray addObject:stringNameWithPNG];
+                NSLog(@"stringNameWithPNG %@",stringNameWithPNG);
+            }
+            ProjectInfo *currentProjectInfo = [[ProjectInfo alloc] init];
+            currentProjectInfo.projectid = strongSelf->projectInfo.projectid;
+            currentProjectInfo.projectname = name.info;
+            currentProjectInfo.projectdescription = intro.info;
+            currentProjectInfo.projectprice = price.info;
+            currentProjectInfo.vipprice = vipPrice.info;
+            currentProjectInfo.isdelete = @"0";
+            currentProjectInfo.projectimages = [[NSMutableArray alloc] init];
+            [currentProjectInfo.projectimages addObjectsFromArray:strongSelf->imageArray];
+            for (ProjectSectionInfo *info in strongSelf->sectionArray)
+            {
+                [strongSelf->sectionNameArray addObject:info.sectionname];
+                if ([info.sectionname isEqualToString:gender.info])
+                {
+                    currentProjectInfo.sectionid = info.sectionid;
+                    break;
+                }
+            }
+            
+            [[ProjectDao shareInstanceProjectDao] updateNewProject:currentProjectInfo];
+            [GlobalDataManager showHUDWithText:@"添加成功" addTo:strongSelf.view dismissDelay:2. animated:YES];
+            [strongSelf.navigationController popViewControllerAnimated:YES];
+
         } failure:^(NSString *error) {
             NSLog(@"error====%@",error);
         }];
@@ -181,5 +219,14 @@ typedef void(^GenderSelectCompletion)(NSInteger index);
     self.submitCompletion();
 }
 
+#pragma mark 保存图片
+-(NSString *)savescanresultimage:(UIImage *)resultimage imagename:(NSString *)strimagename
+{
+    NSString *stringNameWithPNG = [NSString stringWithFormat:@"%@.png",strimagename];
+    NSData *imageData = UIImagePNGRepresentation(resultimage);
+    NSString *filePath = [projectPicPath stringByAppendingPathComponent:stringNameWithPNG]; //Add the file name
+    [imageData writeToFile:filePath atomically:YES];
+    return filePath;
+}
 
 @end

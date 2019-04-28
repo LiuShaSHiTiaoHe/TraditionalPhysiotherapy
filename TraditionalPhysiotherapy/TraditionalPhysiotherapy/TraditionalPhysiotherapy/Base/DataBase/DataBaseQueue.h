@@ -11,5 +11,5 @@
 @interface DataBaseQueue : BaseDataBaseQueue
 
 + (void)createAllTable;
-
++ (void)createDir;
 @end

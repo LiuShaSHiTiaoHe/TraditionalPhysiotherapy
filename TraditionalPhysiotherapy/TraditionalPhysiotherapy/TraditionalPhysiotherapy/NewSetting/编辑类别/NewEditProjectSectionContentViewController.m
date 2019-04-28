@@ -1,20 +1,20 @@
 //
-//  NewEditProjectContentViewController.m
+//  NewEditProjectSectionContentViewController.m
 //  TraditionalPhysiotherapy
 //
-//  Created by GuGuiJun on 2018/12/12.
-//  Copyright © 2018 Gu GuiJun. All rights reserved.
+//  Created by GuGuiJun on 2019/1/23.
+//  Copyright © 2019 Gu GuiJun. All rights reserved.
 //
 
-#import "NewEditProjectContentViewController.h"
-#import "NewEditProjectContentForm.h"
+#import "NewEditProjectSectionContentViewController.h"
+#import "NewEditProjectSectionContentForm.h"
 #import "ProjectDao.h"
 
-@interface NewEditProjectContentViewController ()
+@interface NewEditProjectSectionContentViewController ()
 
 @end
 
-@implementation NewEditProjectContentViewController
+@implementation NewEditProjectSectionContentViewController
 @synthesize currentInfo;
 
 - (void)viewDidLoad {
@@ -38,7 +38,7 @@
     [backButton setImage:[UIImage imageNamed:@"back" imageBundle:@"Project"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(backBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [myNavView addSubview:backButton];
- 
+    
     
     UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [deleteButton setImage:[UIImage imageNamed:@"delete" imageBundle:@"Project"] forState:UIControlStateNormal];
@@ -47,7 +47,7 @@
     
     
     UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.text = currentInfo.projectname;
+    titleLabel.text = currentInfo.sectionname;
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont systemFontOfSize:30];
@@ -93,7 +93,7 @@
         make.width.height.equalTo(50);
     }];
     
-    NewEditProjectContentForm *content = [[NewEditProjectContentForm alloc] init];
+    NewEditProjectSectionContentForm *content = [[NewEditProjectSectionContentForm alloc] init];
     content.projectInfo = currentInfo;
     [self.view addSubview:content.view];
     
@@ -125,8 +125,9 @@
     CKAlertAction *sure = [CKAlertAction actionWithTitle:@"确定" handler:^(CKAlertAction *action) {
         NSLog(@"点击了 %@ 按钮",action.title);
         
-        [[ProjectDao shareInstanceProjectDao] updateProject:currentInfo.projectid andState:@"1"];
-        
+        [[ProjectDao shareInstanceProjectDao] updateProjectSection:currentInfo.sectionid andState:@"1"];
+//        -(void)updateProjectSection:(NSString *)sectiontId andState:(NSString *)isdelete;
+
     }];
     
     [alertVC addAction:cancel];

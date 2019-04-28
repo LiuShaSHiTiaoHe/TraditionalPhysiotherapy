@@ -108,6 +108,8 @@
 		69A0645D20289175002884F8 /* AddRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A0645C20289175002884F8 /* AddRecordView.m */; };
 		69A0646020289A27002884F8 /* RecordDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A0645F20289A27002884F8 /* RecordDao.m */; };
 		69A0646320289ABE002884F8 /* RecordInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A0646220289ABE002884F8 /* RecordInfo.m */; };
+		69A9B16921F83CD300CBBD36 /* NewEditProjectSectionContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A9B16821F83CD300CBBD36 /* NewEditProjectSectionContentViewController.m */; };
+		69A9B16C21F83CEB00CBBD36 /* NewEditProjectSectionContentForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A9B16B21F83CEB00CBBD36 /* NewEditProjectSectionContentForm.m */; };
 		69BA3F97201873310093D75F /* ProjectSectionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BA3F96201873310093D75F /* ProjectSectionInfo.m */; };
 		69BDF9EB204D2B1800FFA514 /* TechnicianInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BDF9EA204D2B1800FFA514 /* TechnicianInfo.m */; };
 		69BDF9EE204D2B2500FFA514 /* TechnicianDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BDF9ED204D2B2500FFA514 /* TechnicianDao.m */; };
@@ -474,6 +476,10 @@
 		69A0645F20289A27002884F8 /* RecordDao.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordDao.m; sourceTree = "<group>"; };
 		69A0646120289ABE002884F8 /* RecordInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordInfo.h; sourceTree = "<group>"; };
 		69A0646220289ABE002884F8 /* RecordInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordInfo.m; sourceTree = "<group>"; };
+		69A9B16721F83CD300CBBD36 /* NewEditProjectSectionContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewEditProjectSectionContentViewController.h; sourceTree = "<group>"; };
+		69A9B16821F83CD300CBBD36 /* NewEditProjectSectionContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewEditProjectSectionContentViewController.m; sourceTree = "<group>"; };
+		69A9B16A21F83CEB00CBBD36 /* NewEditProjectSectionContentForm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewEditProjectSectionContentForm.h; sourceTree = "<group>"; };
+		69A9B16B21F83CEB00CBBD36 /* NewEditProjectSectionContentForm.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewEditProjectSectionContentForm.m; sourceTree = "<group>"; };
 		69BA3F95201873310093D75F /* ProjectSectionInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectSectionInfo.h; sourceTree = "<group>"; };
 		69BA3F96201873310093D75F /* ProjectSectionInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectSectionInfo.m; sourceTree = "<group>"; };
 		69BDF9E9204D2B1800FFA514 /* TechnicianInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TechnicianInfo.h; sourceTree = "<group>"; };
@@ -1210,6 +1216,10 @@
 			children = (
 				698E4A5321D0C5FE00E0C892 /* NewEditProjectSectionController.h */,
 				698E4A5421D0C5FE00E0C892 /* NewEditProjectSectionController.m */,
+				69A9B16721F83CD300CBBD36 /* NewEditProjectSectionContentViewController.h */,
+				69A9B16821F83CD300CBBD36 /* NewEditProjectSectionContentViewController.m */,
+				69A9B16A21F83CEB00CBBD36 /* NewEditProjectSectionContentForm.h */,
+				69A9B16B21F83CEB00CBBD36 /* NewEditProjectSectionContentForm.m */,
 			);
 			path = "编辑类别";
 			sourceTree = "<group>";
@@ -2072,6 +2082,7 @@
 				69E1A17521BF9C7100736ACA /* PSTCollectionViewController.m in Sources */,
 				697276241FDFF2D0001BA281 /* InfoCollectionViewCell.m in Sources */,
 				69E1A0EF21BF9BFD00736ACA /* SWFormBaseCell.m in Sources */,
+				69A9B16C21F83CEB00CBBD36 /* NewEditProjectSectionContentForm.m in Sources */,
 				69E1A19021BF9C7100736ACA /* UIImage+EMMultiFormat.m in Sources */,
 				696558E82008AB7F00D3F575 /* RTImagePickerPhoto.m in Sources */,
 				69E1A16D21BF9C7100736ACA /* MWCaptionView.m in Sources */,
@@ -2099,6 +2110,7 @@
 				69E1A19F21C0B09600736ACA /* NewEditProjectContentForm.m in Sources */,
 				696558E62008AB7F00D3F575 /* RTImagePickerZoomingScrollView.m in Sources */,
 				696558DF2008AB7F00D3F575 /* RTImagePickerTitleButton.m in Sources */,
+				69A9B16921F83CD300CBBD36 /* NewEditProjectSectionContentViewController.m in Sources */,
 				69E1A17A21BF9C7100736ACA /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				69E1A16A21BF9C7100736ACA /* TZPhotoPreviewCell.m in Sources */,
 				69E1A18E21BF9C7100736ACA /* EMSDWebImageDownloaderOperation.m in Sources */,
@@ -2378,19 +2390,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 328878535J;
+				DEVELOPMENT_TEAM = WGVX8DEF6S;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ./TraditionalPhysiotherapy/TraditionalPhysiotherapy.pch;
 				INFOPLIST_FILE = TraditionalPhysiotherapy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.centit.guguijun.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zt.guguijun.test;
 				PRODUCT_NAME = "家传古方";
 				PROVISIONING_PROFILE = "12b77f95-e541-490c-b09a-da208db11096";
-				PROVISIONING_PROFILE_SPECIFIER = 123123123123;
+				PROVISIONING_PROFILE_SPECIFIER = GuGuiJunTestDev;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2411,7 +2423,7 @@
 				INFOPLIST_FILE = TraditionalPhysiotherapy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.centit.guguijun.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zt.guguijun.test;
 				PRODUCT_NAME = "家传古方";
 				PROVISIONING_PROFILE = "12b77f95-e541-490c-b09a-da208db11096";
 				PROVISIONING_PROFILE_SPECIFIER = 123123123123;

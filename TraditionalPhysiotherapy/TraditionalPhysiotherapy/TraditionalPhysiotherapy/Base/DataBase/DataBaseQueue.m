@@ -11,41 +11,34 @@
 NSString *const databaseKey = @"Comprise";
 
 @implementation DataBaseQueue
-
-+ (void)example
++ (void)createDir
 {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:userDocumentPath])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:userDocumentPath withIntermediateDirectories:NO attributes:nil error:nil];
+    }
+    if (![[NSFileManager defaultManager] fileExistsAtPath:userHeadPicPath])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:userHeadPicPath withIntermediateDirectories:NO attributes:nil error:nil];
+    }
+    if (![[NSFileManager defaultManager] fileExistsAtPath:projectPicPath])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:projectPicPath withIntermediateDirectories:NO attributes:nil error:nil];
+    }
+    if (![[NSFileManager defaultManager] fileExistsAtPath:userSignPath])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:userSignPath withIntermediateDirectories:NO attributes:nil error:nil];
+    }
+    if (![[NSFileManager defaultManager] fileExistsAtPath:recordImagePath])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:recordImagePath withIntermediateDirectories:NO attributes:nil error:nil];
+    }
     
-    FMDatabaseQueue *queue = [DataBaseQueue shareInstance];
-    [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-        
-        [db executeUpdate:@"create table if not exists test (a text, b text, c integer, d double, e double)"];
-        
-        int i = 0;
-        while (i++ < 20)
-        {
-            [db executeUpdate:@"insert into test (a, b, c, d, e) values (?, ?, ?, ?, ?)" ,
-             @"hi'", // look!  I put in a ', and I'm not escaping it!
-             [NSString stringWithFormat:@"number %d", i],
-             [NSNumber numberWithInt:i],
-             [NSDate date],
-             [NSNumber numberWithFloat:2.2f]];
-        }
-        
-        FMResultSet *rs = [db executeQuery:@"select rowid,* from test where a = ?", @"hi'"];
-        
-        while ([rs next])
-        {
-            if (!([[rs columnNameForIndex:0] isEqualToString:@"rowid"] &&
-                  [[rs columnNameForIndex:1] isEqualToString:@"a"])
-                )
-            {
-                NSLog(@"WHOA THERE BUDDY, columnNameForIndex ISN'T WORKING!");
-            }
-        }
-        
-        [rs close];
-        
-    }];
+    [[NSFileManager defaultManager] removeItemAtPath:tempFilePath error:nil];
+    [[NSFileManager defaultManager] createDirectoryAtPath:tempFilePath withIntermediateDirectories:NO attributes:nil error:nil];
+    
+    NSLog(@"userDocumentPath__path:%@",userDocumentPath);
+    NSLog(@"userHeadPicPath__path:%@",userHeadPicPath);
 }
 
 + (void)createAllTable

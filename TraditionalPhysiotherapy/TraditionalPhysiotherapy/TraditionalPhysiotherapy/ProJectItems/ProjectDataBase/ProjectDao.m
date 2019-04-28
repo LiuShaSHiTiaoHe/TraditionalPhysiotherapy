@@ -77,6 +77,21 @@ static ProjectDao *instance = nil;
     }];
 }
 
+-(void)updateSection:(NSDictionary *)dic
+{
+    FMDatabaseQueue *queue = [DataBaseQueue shareInstance];
+    [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        
+        [db executeUpdate:@"update ProjectSection set sectionname= ?,sectiondescription = ?,ISDELETE = ?,projectdescription = ?,ISDELETE = ?  where projectid = ?" ,
+         [dic objectForKey:@"sectionname"],
+         [dic objectForKey:@"sectiondescription"],
+         @"0",
+         [dic objectForKey:@"uuidString"]
+         ];
+        
+    }];
+}
+
 -(void)updateProjectSection:(NSString *)sectiontId andState:(NSString *)isdelete
 {
     FMDatabaseQueue *queue = [DataBaseQueue shareInstance];
