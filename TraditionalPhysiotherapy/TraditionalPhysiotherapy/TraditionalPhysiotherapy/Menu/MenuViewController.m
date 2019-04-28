@@ -320,11 +320,22 @@
     if (info.projectimages.count > 0)
     {
         NSString *filePath = [projectPicPath stringByAppendingPathComponent:[info.projectimages objectAtIndex:0]];
-//        UIImage *proimage = [UIImage imageWithContentsOfFile:filePath];
+        UIImage *proimage = [UIImage imageWithContentsOfFile:filePath];
 //        NSData *data = UIImageJPEGRepresentation(proimage, 0.4);
 //        UIImage *resultImage = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:filePath]];
-        UIImage *resultImage = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:filePath] withScale:0.5];
-
+        
+        UIImage *resultImage ;
+        if (!proimage)
+        {
+            resultImage = [UIImage imageNamed:@"face" imageBundle:@"Project"];
+        }
+        else
+        {
+            resultImage = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:filePath] withScale:0.5];
+        }
+        
+//        UIImage *resultImage = [GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:filePath] withScale:0.5];
+       
         [projectImageDic setObject:resultImage forKey:info.projectid];
     }
 }
