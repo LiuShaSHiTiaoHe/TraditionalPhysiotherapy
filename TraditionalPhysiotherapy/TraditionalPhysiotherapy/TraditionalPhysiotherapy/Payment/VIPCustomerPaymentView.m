@@ -20,6 +20,7 @@
 #import "QRcodeView.h"
 
 @implementation VIPCustomerPaymentView
+@synthesize delegate;
 
 -(id)initWithFrame:(CGRect)frame
 {
@@ -319,7 +320,7 @@
         [EasyShowTextView showSuccessText:@"结账成功"];
         
         [self checkSucceed];
-        
+   
         
     }
     else
@@ -388,15 +389,20 @@
         [self checkSucceed];
         //更新余额
         [self updateUserBalance:totalPrice];
+        
+        if (delegate && [delegate respondsToSelector:@selector(startCutTheImageWithBillId:)])
+        {
+            [delegate startCutTheImageWithBillId:billInfo.billid];
+        }
     }
     else
     {
         MBProgressHUD *my_hud = [[MBProgressHUD alloc] initWithView:self];
         my_hud.mode = MBProgressHUDModeText;
-        my_hud.labelText = @"请选择会员";
-        [my_hud show:YES];
+        my_hud.label.text = @"请选择会员";
+        [my_hud showAnimated:YES];
         [self addSubview:my_hud];
-        [my_hud hide:YES afterDelay:3];
+        [my_hud hideAnimated:YES afterDelay:3];
         
     }
     

@@ -13,6 +13,13 @@
 #import "PaySucceedView.h"
 #import "SelectTechnicianView.h"
 
+@protocol VIPCustomerPaymentViewDelegate <NSObject>
+
+-(void)startCutTheImageWithBillId:(NSString *)billId;
+//-(void)checkOutSuccess;
+
+@end
+
 @interface VIPCustomerPaymentView : UIView<UITableViewDelegate,UITableViewDataSource,SelectContactViewDelegate,PaySucceedViewDelegate,SelectTechnicianViewDelegate>
 {
     UIImageView *headPic;
@@ -28,7 +35,10 @@
     UIButton *otherPay;
     UIButton *vipPay;
     ContactInfo *currentContactInfo;
+    __weak id<VIPCustomerPaymentViewDelegate> delegate;
 }
+@property(nonatomic,weak)id<VIPCustomerPaymentViewDelegate> delegate;
+
 
 -(void)refreshData;
 

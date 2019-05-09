@@ -95,6 +95,32 @@ static BillDao *instance = nil;
 }
 
 
+-(BillInfo *)getBillInfo:(NSString *)billId
+{
+    BillInfo *module = [[BillInfo alloc] init];
 
+    FMDatabaseQueue *queue = [DataBaseQueue shareInstance];
+    [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        
+        FMResultSet *rs = [db executeQuery:@"SELECT * FROM BILL WHERE billid = ? ",billId];
+        while ([rs next])
+        {
+            module.billid = [rs stringForColumn:@"billid"];
+            module.userid = [rs stringForColumn:@"userid"];
+            NSData *projectData = [rs dataForColumn:@"items"];
+            NSArray * arr  = [NSKeyedUnarchiver unarchiveObjectWithData:projectData];
+            module.projectArray = [[NSMutableArray alloc] init];
+            [module.projectArray addObjectsFromArray:arr];
+            module.userSign = [rs stringForColumn:@"usersign"];
+            module.recordTime = [rs stringForColumn:@"recordtime"];
+            module.premoney = [rs stringForColumn:@"premoney"];
+            module.balance = [rs stringForColumn:@"balance"];
+            module.total= [rs stringForColumn:@"total"];
+            module.isOtherPay = [rs stringForColumn:@"OtherPay"];
+        }
+    }];
+    
+    return module;
+}
 
 @end

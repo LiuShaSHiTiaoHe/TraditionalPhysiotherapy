@@ -28,7 +28,7 @@
 #import "QRcodeViewController.h"
 #import "QRcodeView.h"
 
-@interface NewPaymentViewController ()<UITableViewDelegate,UITableViewDataSource,SelectContactViewDelegate,PaySucceedViewDelegate,SelectTechnicianViewDelegate>
+@interface NewPaymentViewController ()<UITableViewDelegate,UITableViewDataSource,UIPopoverPresentationControllerDelegate,SelectContactViewDelegate,PaySucceedViewDelegate,SelectTechnicianViewDelegate>
 {
     UIImageView *headPic;
     UILabel *nameLabel;
@@ -43,6 +43,8 @@
     UIButton *otherPay;
     UIButton *vipPay;
     ContactInfo *currentContactInfo;
+    
+    UIImage *shareImage;
 }
 
 @end
@@ -430,6 +432,7 @@
 {
     if (currentContactInfo)
     {
+        
         BOOL judgeSelectTechnician = [self judgeAlreadySelectedTechnician];
         if (!judgeSelectTechnician)
         {
@@ -438,6 +441,7 @@
 
             return;
         }
+        [self getImage];
         
         BillInfo *billInfo = [[BillInfo alloc] init];
         billInfo.userid = currentContactInfo.userId;
@@ -477,28 +481,57 @@
         
         //添加技师记录
         [self addTechniaicnRecord];
-        
-//        [EasyShowTextView showSuccessText:@"结账成功"];
-//        [GlobalDataManager showHUDWithText:@"结账成功" addTo:self.view dismissDelay:2. animated:YES];
-
         [self checkSucceed];
         //更新余额
         [self updateUserBalance:totalPrice];
+        [self shareImage];
     }
     else
     {
-//        MBProgressHUD *my_hud = [[MBProgressHUD alloc] initWithView:self.view];
-//        my_hud.mode = MBProgressHUDModeText;
-//        my_hud.labelText = @"请选择会员";
-//        [my_hud show:YES];
-//        [self.view addSubview:my_hud];
-//        [my_hud hide:YES afterDelay:3];
-        
         [GlobalDataManager showHUDWithText:@"请选择会员" addTo:self.view dismissDelay:3. animated:YES];
     }
     
 }
 
+-(void)getImage
+{
+    shareImage = [UIImage getImageViewWithView:self.view];
+    [self calulateImageFileSize:shareImage];
+  
+}
+
+-(void)shareImage
+{
+    NSArray *postItems=@[shareImage];
+    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:postItems applicationActivities:nil];
+    controller.completionWithItemsHandler = ^(UIActivityType  _Nullable   activityType,
+                                              BOOL completed,
+                                              NSArray * _Nullable returnedItems,
+                                              NSError * _Nullable activityError) {
+        
+        NSLog(@"activityType: %@,\n completed: %d,\n returnedItems:%@,\n activityError:%@",activityType,completed,returnedItems,activityError);
+        if (completed)
+        {
+            
+        }
+    };
+    controller.modalPresentationStyle = UIModalPresentationPopover;
+    controller.preferredContentSize = CGSizeMake(400, 300);
+    UIPopoverPresentationController *pop = controller.popoverPresentationController;
+    pop.sourceView = self.view;
+    pop.sourceRect = CGRectMake(self.view.frame.size.width / 2, self.view.frame.size.height/2, 0, 0);
+    pop.permittedArrowDirections = UIPopoverArrowDirectionUp;
+    pop.backgroundColor = [UIColor whiteColor];
+    pop.delegate = self;
+    [self presentViewController:controller animated:YES completion:^{
+        
+    }];
+}
+#pragma mark- UIPopoverPresentationControllerDelegate
+-(UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller
+{
+    return UIModalPresentationNone;
+}
 -(void)checkSucceed
 {
     [[OrderRecordInfo shareOrderRecordInfo].projectArray removeAllObjects];
@@ -506,7 +539,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:CartProjectChanged object:nil];
     [self clearSign];
     [self refreshData];
-    [self showSucceedView];
+//    [self showSucceedView];
 }
 
 
@@ -796,4 +829,20 @@
     [userViewController.navigationController pushViewController:temp animated:YES];
 }
 
+
+- (void)calulateImageFileSize:(UIImage *)image
+{
+    NSData *data = UIImagePNGRepresentation(image);
+    if (!data) {
+        data = UIImageJPEGRepresentation(image, 1.0);//需要改成0.5才接近原图片大小，原因请看下文
+    }
+    double dataLength = [data length] * 1.0;
+    NSArray *typeArray = @[@"bytes",@"KB",@"MB",@"GB",@"TB",@"PB", @"EB",@"ZB",@"YB"];
+    NSInteger index = 0;
+    while (dataLength > 1024) {
+        dataLength /= 1024.0;
+        index ++;
+    }
+    NSLog(@"image = %.3f %@",dataLength,typeArray[index]);
+}
 @end

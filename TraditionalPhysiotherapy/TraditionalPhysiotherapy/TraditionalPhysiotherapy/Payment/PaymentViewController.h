@@ -11,7 +11,7 @@
 #import "CommonCustomerPaymentView.h"
 #import "VIPCustomerPaymentView.h"
 
-@interface PaymentViewController : UIViewController<PaymentViewDelegate>
+@interface PaymentViewController : UIViewController<PaymentViewDelegate,VIPCustomerPaymentViewDelegate>
 {
     PaymentView *contentView;
     CommonCustomerPaymentView *commonView;

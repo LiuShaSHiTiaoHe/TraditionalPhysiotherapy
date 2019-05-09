@@ -119,8 +119,58 @@
     hud.userInteractionEnabled = NO;
     hud.bezelView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
     // Move to bottm center.
-    hud.minSize = CGSizeMake(400., 250.);
+    hud.minSize = CGSizeMake(200., 100.);
     [hud hideAnimated:animated afterDelay:delay];
 }
 
++(void)resizeRecordImage
+{
+    dispatch_queue_t concurrencyQueue = dispatch_queue_create("resizeRecordImage-queue",
+                                                              DISPATCH_QUEUE_CONCURRENT);
+    dispatch_async(concurrencyQueue, ^{
+        // 这里放异步执行任务代码
+        // 工程目录
+        NSString *BASE_PATH = recordImagePath;
+        NSFileManager *myFileManager = [NSFileManager defaultManager];
+        NSDirectoryEnumerator *myDirectoryEnumerator = [myFileManager enumeratorAtPath:BASE_PATH];
+        
+        BOOL isDir = NO;
+        BOOL isExist = NO;
+        NSMutableArray *imageArray = [NSMutableArray new];
+        //列举目录内容，可以遍历子目录
+        for (NSString *path in myDirectoryEnumerator.allObjects)
+        {
+            isExist = [myFileManager fileExistsAtPath:[NSString stringWithFormat:@"%@/%@", BASE_PATH, path] isDirectory:&isDir];
+            if (isDir) {
+                NSLog(@"%@", path);    // 目录路径
+            } else {
+                NSLog(@"%@", path);    // 文件路径
+                CGFloat filesize = [[NSFileManager defaultManager] attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@", BASE_PATH, path] error:nil].fileSize;
+                CGFloat realSize =filesize/1000/1000;
+                NSLog(@"filesize %f MB",realSize);
+                if (realSize > 3.)
+                {
+                    [imageArray addObject:path];
+                }
+            }
+        }
+        
+        if (imageArray.count > 0)
+        {
+            for (NSString *path in imageArray)
+            {
+                NSData *data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", BASE_PATH, path]];
+                UIImage *image = [UIImage imageWithData:data];
+                UIImage *resizedImage = [self resizeImageByvImage:image withScale:0.3];
+                NSData *imageData = UIImageJPEGRepresentation(resizedImage, 1.);
+                [imageData writeToFile:[NSString stringWithFormat:@"%@/%@", BASE_PATH, path] atomically:YES];
+            }
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+        
+        });
+
+    });
+}
 @end

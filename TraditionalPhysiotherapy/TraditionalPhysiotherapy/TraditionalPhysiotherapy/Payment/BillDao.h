@@ -17,4 +17,6 @@
 
 -(NSMutableArray *)getBillInfoByUser:(NSString *)userid;
 
+-(BillInfo *)getBillInfo:(NSString *)billId;
+
 @end

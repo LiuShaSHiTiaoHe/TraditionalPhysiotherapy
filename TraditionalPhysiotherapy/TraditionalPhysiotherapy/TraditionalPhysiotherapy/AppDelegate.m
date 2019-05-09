@@ -15,7 +15,8 @@
 @end
 
 @implementation AppDelegate
-
+#define AVOSCloudAppID  @"NHBocj1xxv7BBXaE3HbmbMM9-gzGzoHsz"
+#define AVOSCloudAppKey @"GYk8QkhuixMDDdWgcLj9hx0a"
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -23,6 +24,11 @@
 
     [DataBaseQueue createDir];
     [DataBaseQueue createAllTable];
+    //设置AVOSCloud
+    [AVOSCloud setApplicationId:AVOSCloudAppID
+                      clientKey:AVOSCloudAppKey];
+//    [AVOSCloud setAllLogsEnabled:NO];
+//    [AVOSCloud setLogLevel:AVLogLevelNone];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     MainViewController *mainVC = [[MainViewController alloc] init];
     BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:mainVC];
@@ -31,9 +37,7 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
     [self.window makeKeyAndVisible];
-    
-    
-    
+        
     return YES;
 }
 

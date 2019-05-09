@@ -144,17 +144,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    BillDetailListCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
+    NewBillDetailListCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     UIImage *image=[UIImage getImageViewWithView:cell];
     [self calulateImageFileSize:image];
-//    image = [GlobalDataManager resizeImageByvImage:image withScale:0.5];
-//    [self calulateImageFileSize:image];
-
     NSArray *postItems=@[image];
-//    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-//    UIViewController *rootViewController = window.rootViewController;
-    
     UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:postItems applicationActivities:nil];
     controller.completionWithItemsHandler = ^(UIActivityType  _Nullable   activityType,
                                               BOOL completed,
@@ -167,11 +160,6 @@
        
         }
     };
-    
-//    UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:controller];
-//    [popup presentPopoverFromRect:CGRectMake(700, 20, 400, 400) inView:rootViewController.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    
-
     controller.modalPresentationStyle = UIModalPresentationPopover;
     controller.preferredContentSize = CGSizeMake(400, 300);
     UIPopoverPresentationController *pop = controller.popoverPresentationController;

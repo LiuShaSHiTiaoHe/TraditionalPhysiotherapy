@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NewSettingViewController : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
     NewSettingView *contentView;
+    MBProgressHUD *hud;
+    MBProgressHUD *prepareHud;
+
 }
 @end
 

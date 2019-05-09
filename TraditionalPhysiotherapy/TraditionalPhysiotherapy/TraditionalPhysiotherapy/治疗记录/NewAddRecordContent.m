@@ -160,6 +160,7 @@
 -(NSString *)savescanresultimage:(UIImage *)resultimage imagename:(NSString *)strimagename
 {
     NSString *stringNameWithPNG = [NSString stringWithFormat:@"%@.png",strimagename];
+//    NSData *imageData = [UIImage lubanCompressImage:resultimage];
     NSData *imageData = UIImagePNGRepresentation(resultimage);
     NSString *filePath = [tempFilePath stringByAppendingPathComponent:stringNameWithPNG]; //Add the file name
     [imageData writeToFile:filePath atomically:YES];

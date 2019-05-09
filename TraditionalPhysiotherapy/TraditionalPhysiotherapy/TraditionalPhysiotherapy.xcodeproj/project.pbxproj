@@ -14,6 +14,8 @@
 		690C875D21BEA01500A9076F /* ProjectSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 690C875C21BEA01500A9076F /* ProjectSectionView.m */; };
 		690D65821FFDF5B900A70152 /* AddVIPView.m in Sources */ = {isa = PBXBuildFile; fileRef = 690D65811FFDF5B900A70152 /* AddVIPView.m */; };
 		690D658B1FFF68FE00A70152 /* AddVipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 690D658A1FFF68FE00A70152 /* AddVipCell.m */; };
+		69125EEE227591370032F353 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 69125EED227591370032F353 /* libz.tbd */; };
+		69125EF222759E600032F353 /* UIImage+Luban_iOS_Extension_h.m in Sources */ = {isa = PBXBuildFile; fileRef = 69125EF122759E600032F353 /* UIImage+Luban_iOS_Extension_h.m */; };
 		691380CA201E395300A7040B /* AddProjrctView.m in Sources */ = {isa = PBXBuildFile; fileRef = 691380C9201E395300A7040B /* AddProjrctView.m */; };
 		691380CE201F0B8000A7040B /* Project.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 691380CD201F0B8000A7040B /* Project.bundle */; };
 		691380D2201F13E100A7040B /* ProjectDesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 691380D1201F13E100A7040B /* ProjectDesCollectionViewCell.m */; };
@@ -292,6 +294,9 @@
 		690D65811FFDF5B900A70152 /* AddVIPView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddVIPView.m; sourceTree = "<group>"; };
 		690D65891FFF68FE00A70152 /* AddVipCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddVipCell.h; sourceTree = "<group>"; };
 		690D658A1FFF68FE00A70152 /* AddVipCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddVipCell.m; sourceTree = "<group>"; };
+		69125EED227591370032F353 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		69125EF022759E600032F353 /* UIImage+Luban_iOS_Extension_h.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Luban_iOS_Extension_h.h"; sourceTree = "<group>"; };
+		69125EF122759E600032F353 /* UIImage+Luban_iOS_Extension_h.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Luban_iOS_Extension_h.m"; sourceTree = "<group>"; };
 		691380C8201E395300A7040B /* AddProjrctView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddProjrctView.h; sourceTree = "<group>"; };
 		691380C9201E395300A7040B /* AddProjrctView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddProjrctView.m; sourceTree = "<group>"; };
 		691380CD201F0B8000A7040B /* Project.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Project.bundle; sourceTree = "<group>"; };
@@ -770,6 +775,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69125EEE227591370032F353 /* libz.tbd in Frameworks */,
 				697276311FE04D9E001BA281 /* Foundation.framework in Frameworks */,
 				6972762F1FE04D89001BA281 /* UIKit.framework in Frameworks */,
 				692568401FDFCD0C0058E067 /* Accelerate.framework in Frameworks */,
@@ -821,6 +827,15 @@
 				690C875921BEA00700A9076F /* ProjectSectionViewController.m */,
 			);
 			path = "添加大类";
+			sourceTree = "<group>";
+		};
+		69125EEF22759E600032F353 /* Luban_iOS_Extension_h */ = {
+			isa = PBXGroup;
+			children = (
+				69125EF022759E600032F353 /* UIImage+Luban_iOS_Extension_h.h */,
+				69125EF122759E600032F353 /* UIImage+Luban_iOS_Extension_h.m */,
+			);
+			path = Luban_iOS_Extension_h;
 			sourceTree = "<group>";
 		};
 		691380CF201F13AD00A7040B /* Cells */ = {
@@ -1736,6 +1751,7 @@
 		69FDF4541FCB104800997763 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				69125EEF22759E600032F353 /* Luban_iOS_Extension_h */,
 				696D589D21CB666A001319B1 /* 警告框 */,
 				69E1A0BE21BF9BFD00736ACA /* SWForm */,
 				69C07F6720C6751A00DCE52D /* ChineseToPinyin.h */,
@@ -1799,6 +1815,7 @@
 		E32765514C4F3A651E8535BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				69125EED227591370032F353 /* libz.tbd */,
 				697276301FE04D96001BA281 /* Foundation.framework */,
 				6972762E1FE04D7F001BA281 /* UIKit.framework */,
 				6925683F1FDFCCFD0058E067 /* Accelerate.framework */,
@@ -1965,20 +1982,22 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TraditionalPhysiotherapy/Pods-TraditionalPhysiotherapy-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TraditionalPhysiotherapy/Pods-TraditionalPhysiotherapy-resources.sh",
+				"${PODS_ROOT}/AVOSCloud/AVOS/AVOSCloud/AVOSCloud_Art.inc",
 				"${PODS_ROOT}/HWDownSelectedView/HWDownSelectedTF/Resources/arrow_up@2x.png",
 				"${PODS_ROOT}/PGDatePicker/PGDatePicker/PGDatePicker.bundle",
 				"${PODS_ROOT}/PYSearch/PYSearch/PYSearch.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AVOSCloud_Art.inc",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/arrow_up@2x.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PGDatePicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PYSearch.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TraditionalPhysiotherapy/Pods-TraditionalPhysiotherapy-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TraditionalPhysiotherapy/Pods-TraditionalPhysiotherapy-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DE006BB34753B8A8BB52C53A /* [CP] Check Pods Manifest.lock */ = {
@@ -2067,6 +2086,7 @@
 				69C07F6820C6751A00DCE52D /* ChineseToPinyin.m in Sources */,
 				696558E92008AB7F00D3F575 /* RTImagePickerTapDetectingImageView.m in Sources */,
 				69E1A16C21BF9C7100736ACA /* MWPhotoBrowser.m in Sources */,
+				69125EF222759E600032F353 /* UIImage+Luban_iOS_Extension_h.m in Sources */,
 				69E1A16521BF9C7100736ACA /* UIView+Layout.m in Sources */,
 				696558DD2008AB7F00D3F575 /* RTVideoIconView.m in Sources */,
 				69E1A16F21BF9C7100736ACA /* MWTapDetectingImageView.m in Sources */,

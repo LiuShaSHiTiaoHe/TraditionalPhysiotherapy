@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F71D9A7858A28D39544AD9A929AB4925"
+               BlueprintIdentifier = "D21962D0DE148A440FADB55935BD4264"
+               BuildableName = "libSQLCipher.a"
                BlueprintName = "SQLCipher"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libSQLCipher.a">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

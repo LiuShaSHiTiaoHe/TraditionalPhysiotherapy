@@ -50,6 +50,8 @@
 #import "SWForm.h"
 #import <PYSearch.h>
 #import "CKAlertViewController.h"
+#import <AVOSCloud/AVOSCloud.h>
+#import "UIImage+Luban_iOS_Extension_h.h"
 
 #define UIScreenWidth [UIScreen mainScreen].bounds.size.width
 #define UIScreenHeight [UIScreen mainScreen].bounds.size.height

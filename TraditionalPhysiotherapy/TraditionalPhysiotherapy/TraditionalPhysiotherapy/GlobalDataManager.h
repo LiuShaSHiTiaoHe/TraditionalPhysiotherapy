@@ -24,4 +24,6 @@
 #pragma mark 设置手势密码
 + (void)setGestureCode:(NSString *)code;
 
++(void)resizeRecordImage;
+
 @end
