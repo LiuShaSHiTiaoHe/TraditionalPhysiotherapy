@@ -34,17 +34,17 @@
         make.edges.equalTo(self.view);
     }];
     
-    prepareHud = [[MBProgressHUD alloc] initWithView:self.view];
-    // Set the text mode to show only text.
-    hud.mode = MBProgressHUDModeText;
-    hud.label.text = @"数据准备中...";
-    hud.label.textColor = [UIColor whiteColor];
-    hud.label.font = [UIFont systemFontOfSize:33];
-    hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
-    hud.userInteractionEnabled = NO;
-    hud.bezelView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
-    // Move to bottm center.
-    hud.minSize = CGSizeMake(200., 100.);
+//    prepareHud = [[MBProgressHUD alloc] initWithView:self.view];
+//    // Set the text mode to show only text.
+//    prepareHud.mode = MBProgressHUDModeText;
+//    prepareHud.label.text = @"数据准备中...";
+//    prepareHud.label.textColor = [UIColor whiteColor];
+//    prepareHud.label.font = [UIFont systemFontOfSize:33];
+//    prepareHud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+//    prepareHud.userInteractionEnabled = NO;
+//    prepareHud.bezelView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
+//    // Move to bottm center.
+//    prepareHud.minSize = CGSizeMake(200., 100.);
 }
 
 #pragma mark - UICollectionViewDelegate + UICollectionViewDelegate + UICollectionViewDelegateFlowLayout
@@ -186,7 +186,9 @@
 
 -(void)resizeRecordImage
 {
-    [prepareHud showAnimated:YES];
+    [GlobalDataManager showHUDWithText:@"数据准备中..." addTo:self.view dismissDelay:3. animated:YES];
+
+    
     dispatch_queue_t concurrencyQueue = dispatch_queue_create("resizeRecordImage-queue",
                                                               DISPATCH_QUEUE_CONCURRENT);
     dispatch_async(concurrencyQueue, ^{
@@ -231,7 +233,6 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            [prepareHud hideAnimated:YES];
             [self fileUploadBackUp];
 
         });
@@ -241,6 +242,7 @@
 
 -(void)fileUploadBackUp
 {
+    
     NSString *imageZipPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]
                               stringByAppendingPathComponent: @"Images.zip"];
     [SSZipArchive createZipFileAtPath:imageZipPath withContentsOfDirectory:userDocumentPath];
@@ -257,7 +259,6 @@
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
     hud.label.text = @"正在备份";
-    
     [file uploadWithProgress:^(NSInteger percentDone) {
         // 上传进度数据，percentDone 介于 0 和 100。
         NSLog(@"backUp percent is %ld",(long)percentDone);

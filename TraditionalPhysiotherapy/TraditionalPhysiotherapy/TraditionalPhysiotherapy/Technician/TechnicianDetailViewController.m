@@ -12,7 +12,7 @@
 #import "TechnicianWorkRecordCellTableViewCell.h"
 #import "AddTechnician.h"
 
-@interface TechnicianDetailViewController ()<SelectShowStyleByDateViewControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIPopoverPresentationControllerDelegate>
+@interface TechnicianDetailViewController ()<SelectShowStyleByDateViewControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIPopoverPresentationControllerDelegate,UIScrollViewDelegate>
 {
     SelectShowStyleByDateViewController *menuVC;
 }
@@ -101,6 +101,7 @@
     settechnicianTable.backgroundColor = [UIColor whiteColor];
     settechnicianTable.delegate = self;
     settechnicianTable.dataSource = self;
+    
     [self.view addSubview:settechnicianTable];
     
     
@@ -377,24 +378,32 @@
     UILabel * deptLabel = [UILabel new];
     deptLabel.font = [UIFont systemFontOfSize:26];
     deptLabel.text = @"记录详情";
+    deptLabel.textAlignment = NSTextAlignmentCenter;
+
     deptLabel.textColor = [UIColor colorWithHexString:@"bda486"];
     [backView addSubview:deptLabel];
     
     UILabel * projectNameLabel = [UILabel new];
     projectNameLabel.font = [UIFont systemFontOfSize:26];
     projectNameLabel.text = @"项目名称";
+    projectNameLabel.textAlignment = NSTextAlignmentCenter;
+
     projectNameLabel.textColor = [UIColor colorWithHexString:@"bda486"];
     [backView addSubview:projectNameLabel];
     
     UILabel * priceLabel = [UILabel new];
     priceLabel.font = [UIFont systemFontOfSize:26];
     priceLabel.text = @"价格";
+    priceLabel.textAlignment = NSTextAlignmentCenter;
+
     priceLabel.textColor = [UIColor colorWithHexString:@"bda486"];
     [backView addSubview:priceLabel];
     
     UILabel * vipLabel = [UILabel new];
     vipLabel.font = [UIFont systemFontOfSize:26];
     vipLabel.text = @"会员";
+    vipLabel.textAlignment = NSTextAlignmentCenter;
+
     vipLabel.textColor = [UIColor colorWithHexString:@"bda486"];
     [backView addSubview:vipLabel];
     
@@ -402,7 +411,7 @@
     [deptLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(backView.mas_left).offset(20);
-        make.right.equalTo(backView.mas_right).offset(-400);
+        make.width.equalTo(300);
         make.centerY.equalTo(backView.mas_centerY);
         make.height.equalTo(80);
         
@@ -413,7 +422,7 @@
         make.left.equalTo(deptLabel.mas_right);
         make.centerY.equalTo(backView.mas_centerY);
         make.height.equalTo(80);
-        make.width.equalTo(180);
+        make.width.equalTo(280);
     }];
     
     [priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -457,7 +466,15 @@
     return 120;
     
 }
-
+//固定头部视图
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat sectionHeaderHeight = 80;
+    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

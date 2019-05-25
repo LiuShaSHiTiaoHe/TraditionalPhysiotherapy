@@ -12,16 +12,16 @@
 #import "MenuCollectionViewCell.h"
 #import "CollectionViewHeaderView.h"
 
-
 #import "ProjectDao.h"
 #import "ProjectSectionInfo.h"
 #import "ProjectInfo.h"
 
 #import "ShoppingCartTool.h"
-
 #import "MenuItemView.h"
 #import "OrderView.h"
 #import "OrderRecordInfo.h"
+
+#define leftWith 250
 
 @interface MenuViewController ()<UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,MenuCollectionViewCellDelegate,OrderViewDelegate>
 {
@@ -105,7 +105,7 @@
         make.top.equalTo(titleImageView.mas_bottom);
         make.left.equalTo(self.view.mas_left);
         make.bottom.equalTo(self.view.mas_bottom);
-        make.width.equalTo(300.);
+        make.width.equalTo(leftWith);
     }];
     
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -230,7 +230,7 @@
     [leftBackView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(titleImageView.mas_top).offset(0.);
-        make.width.equalTo(300.);
+        make.width.equalTo(leftWith);
         make.left.equalTo(titleImageView.mas_left);
         make.height.equalTo(70.);
     }];

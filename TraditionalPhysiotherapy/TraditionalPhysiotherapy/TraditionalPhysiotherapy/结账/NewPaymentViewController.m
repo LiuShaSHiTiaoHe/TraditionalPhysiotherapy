@@ -334,6 +334,21 @@
 -(void)otherPayAction
 {
     NSMutableArray *arr = [OrderRecordInfo shareOrderRecordInfo].projectArray;
+    if (arr.count == 0)
+    {
+        [GlobalDataManager showHUDWithText:@"请选择服务的项目" addTo:self.view dismissDelay:2. animated:YES];
+        return;
+    }
+    
+    BOOL judgeSelectTechnician = [self judgeAlreadySelectedTechnician];
+    if (!judgeSelectTechnician)
+    {
+        [GlobalDataManager showHUDWithText:@"请选择服务的技师" addTo:self.view dismissDelay:2. animated:YES];
+        return;
+    }
+#pragma mark 获取分享的图片
+    [self getImage];
+    
     NSInteger totalPrice = 0;
     for (NSMutableDictionary *dic in arr)
     {
@@ -370,7 +385,6 @@
         BOOL judgeSelectTechnician = [self judgeAlreadySelectedTechnician];
         if (!judgeSelectTechnician)
         {
-//            [EasyShowTextView showText:@"请选择服务的技师"];
             [GlobalDataManager showHUDWithText:@"请选择服务的技师" addTo:self.view dismissDelay:2. animated:YES];
             return;
         }
@@ -404,25 +418,23 @@
         billInfo.userSign = [NSString stringWithFormat:@"%@.png",billInfo.billid];
         [[BillDao shareInstanceBillDao] addnewRecord:billInfo];
         
+
+#pragma mark 更新用户信息
+        [self updateUserInfo];
+        
         //添加技师记录
         [self addTechniaicnRecord];
+//        [GlobalDataManager showHUDWithText:@"结账成功" addTo:self.view dismissDelay:1. animated:YES];
+#pragma mark 分享图片
+        [self shareImage];
         
-//        [EasyShowTextView showSuccessText:@"结账成功"];
-        [GlobalDataManager showHUDWithText:@"结账成功" addTo:self.view dismissDelay:1. animated:YES];
-
         [self checkSucceed];
-        
-        
     }
     else
     {
         //添加技师记录
         [self addTechniaicnRecord];
-        
-//        [EasyShowTextView showSuccessText:@"结账成功"];
         [GlobalDataManager showHUDWithText:@"结账成功" addTo:self.view dismissDelay:1. animated:YES];
-
-        
         [self checkSucceed];
     }
 }
@@ -432,22 +444,24 @@
 {
     if (currentContactInfo)
     {
-        
+#pragma mark 检查是否有消费的项目
+        NSMutableArray *arr = [OrderRecordInfo shareOrderRecordInfo].projectArray;
+        if (arr.count == 0)
+        {
+            [GlobalDataManager showHUDWithText:@"请选择服务的项目" addTo:self.view dismissDelay:2. animated:YES];
+            return;
+        }
+#pragma mark 检查每个消费项目选择了对应的技师
         BOOL judgeSelectTechnician = [self judgeAlreadySelectedTechnician];
         if (!judgeSelectTechnician)
         {
-//            [EasyShowTextView showText:@"请选择服务的技师"];
             [GlobalDataManager showHUDWithText:@"请选择服务的技师" addTo:self.view dismissDelay:2. animated:YES];
-
             return;
         }
+#pragma mark 获取分享的图片
         [self getImage];
         
-        BillInfo *billInfo = [[BillInfo alloc] init];
-        billInfo.userid = currentContactInfo.userId;
-        billInfo.billid = [self uuidString];
-        billInfo.projectArray = [[NSMutableArray alloc] init];
-        NSMutableArray *arr = [OrderRecordInfo shareOrderRecordInfo].projectArray;
+#pragma mark 检查余额是否充足
         NSInteger totalPrice = 0;
         for (NSMutableDictionary *dic in arr)
         {
@@ -459,10 +473,15 @@
         
         if (totalPrice > [currentContactInfo.userAccountBalance integerValue])
         {
-//            [EasyShowTextView showText:@"账户余额不足"];
             [GlobalDataManager showHUDWithText:@"账户余额不足" addTo:self.view dismissDelay:2. animated:YES];
             return;
         }
+#pragma mark 开始创建账单
+        BillInfo *billInfo = [[BillInfo alloc] init];
+        billInfo.userid = currentContactInfo.userId;
+        billInfo.billid = [self uuidString];
+        billInfo.projectArray = [[NSMutableArray alloc] init];
+
         
         [billInfo.projectArray addObjectsFromArray:arr];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -479,17 +498,24 @@
         billInfo.userSign = [NSString stringWithFormat:@"%@.png",billInfo.billid];
         [[BillDao shareInstanceBillDao] addnewRecord:billInfo];
         
-        //添加技师记录
+#pragma mark 添加技师记录
         [self addTechniaicnRecord];
-        [self checkSucceed];
-        //更新余额
+#pragma mark 更新余额
         [self updateUserBalance:totalPrice];
+#pragma mark 分享图片
         [self shareImage];
+#pragma mark 更新用户信息
+        [self updateUserInfo];
+        
+        [self checkSucceed];
+
     }
     else
     {
         [GlobalDataManager showHUDWithText:@"请选择会员" addTo:self.view dismissDelay:3. animated:YES];
     }
+    
+   
     
 }
 
@@ -497,7 +523,6 @@
 {
     shareImage = [UIImage getImageViewWithView:self.view];
     [self calulateImageFileSize:shareImage];
-  
 }
 
 -(void)shareImage

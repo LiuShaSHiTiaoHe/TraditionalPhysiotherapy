@@ -543,7 +543,9 @@
     {
         currentInfo.userName = name;
         currentInfo.userBirthday = birthDay;
-        currentInfo.userAccountBalance = balance;
+//        currentInfo.userAccountBalance = balance;
+//        currentInfo.userAccountBalance = balance;
+
         if ([gender isEqualToString:@"男同学"])
         {
             currentInfo.userGender = @"male";
