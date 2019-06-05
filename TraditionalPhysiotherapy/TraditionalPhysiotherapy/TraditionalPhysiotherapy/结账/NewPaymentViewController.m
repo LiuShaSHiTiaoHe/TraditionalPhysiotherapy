@@ -382,6 +382,8 @@
 {
     if (currentContactInfo)
     {
+        currentContactInfo = [[ContactsDao shareInstanceContactDao] getUserInfo:currentContactInfo.userId];
+
         BOOL judgeSelectTechnician = [self judgeAlreadySelectedTechnician];
         if (!judgeSelectTechnician)
         {
@@ -444,6 +446,7 @@
 {
     if (currentContactInfo)
     {
+        currentContactInfo = [[ContactsDao shareInstanceContactDao] getUserInfo:currentContactInfo.userId];
 #pragma mark 检查是否有消费的项目
         NSMutableArray *arr = [OrderRecordInfo shareOrderRecordInfo].projectArray;
         if (arr.count == 0)
