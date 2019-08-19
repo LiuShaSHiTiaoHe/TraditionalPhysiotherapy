@@ -211,7 +211,7 @@
     }];
     
     [changeCustomer mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+    
         make.right.equalTo(personalView.mas_right).offset(-10);
         make.centerY.equalTo(personalView.mas_centerY);
         make.width.equalTo(30);
@@ -382,8 +382,9 @@
 {
     if (currentContactInfo)
     {
-        currentContactInfo = [[ContactsDao shareInstanceContactDao] getUserInfo:currentContactInfo.userId];
-
+#pragma mark 更新用户信息
+        [self updateUserInfo];
+        
         BOOL judgeSelectTechnician = [self judgeAlreadySelectedTechnician];
         if (!judgeSelectTechnician)
         {
@@ -446,7 +447,8 @@
 {
     if (currentContactInfo)
     {
-        currentContactInfo = [[ContactsDao shareInstanceContactDao] getUserInfo:currentContactInfo.userId];
+#pragma mark 更新用户信息
+        [self updateUserInfo];
 #pragma mark 检查是否有消费的项目
         NSMutableArray *arr = [OrderRecordInfo shareOrderRecordInfo].projectArray;
         if (arr.count == 0)
