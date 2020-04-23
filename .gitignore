@@ -6,6 +6,16 @@
 build/
 DerivedData/
 
+
+## User settings
+xcuserdata/
+
+### macOS ###
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+
 ## Various settings
 *.pbxuser
 !default.pbxuser
