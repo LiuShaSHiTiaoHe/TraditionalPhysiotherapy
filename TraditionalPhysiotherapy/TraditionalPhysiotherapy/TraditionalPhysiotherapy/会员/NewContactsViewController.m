@@ -136,11 +136,11 @@
         make.top.equalTo(self.view.mas_top);
         make.left.equalTo(self.view.mas_left);
         make.width.equalTo(UIScreenWidth);
-        make.height.equalTo(100.);
+        make.height.equalTo(80.);
     }];
     
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(myNavView.mas_top).offset(40.);
+        make.top.equalTo(myNavView.mas_top).offset(20.);
         make.centerX.equalTo(self.view.mas_centerX);
         make.width.equalTo(UIScreenWidth);
         make.height.equalTo(50.);
@@ -149,9 +149,10 @@
     
     [addContactBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.centerY.equalTo(myNavView.mas_centerY).offset(20.);
+//        make.centerY.equalTo(myNavView.mas_centerY).offset(20.);
+        make.top.equalTo(myNavView.mas_top).offset(30.);
         make.right.equalTo(myNavView.mas_right).offset(-30.);
-        make.width.height.equalTo(50);
+        make.width.height.equalTo(30);
     }];
     
     [searchLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -159,7 +160,7 @@
         make.left.equalTo(self.view.mas_left).offset(4);
         make.top.equalTo(myNavView.mas_bottom).offset(4);
         make.right.equalTo(self.view.mas_right).offset(-4);
-        make.height.equalTo(40.);
+        make.height.equalTo(60.);
     }];
     
     [searchIcon mas_makeConstraints:^(MASConstraintMaker *make) {

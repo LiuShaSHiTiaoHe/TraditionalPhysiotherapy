@@ -200,7 +200,7 @@
     
     titleLabel = [[UILabel alloc] init];
     titleLabel.text = @"菜单";
-    titleLabel.font = [UIFont systemFontOfSize:22];
+    titleLabel.font = [UIFont systemFontOfSize:30];
     titleLabel.textColor = [UIColor whiteColor];
     [rightBackView addSubview:titleLabel];
     

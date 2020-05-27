@@ -43,22 +43,23 @@
 
             make.top.equalTo(self.mas_top).offset(30.);
             make.centerX.equalTo(self.mas_centerX);
-            if (consLength > 300.)
-            {
-                make.height.equalTo(consLength-160);
-                make.width.equalTo(consLength-160);
-            }
-            else
-            {
-                make.height.equalTo(200);
-                make.width.equalTo(200);
-            }
+            make.width.equalTo(self.mas_width).offset(-80);
+//            if (consLength > 300.)
+//            {
+//                make.height.equalTo(consLength-160);
+//                make.width.equalTo(consLength-160);
+//            }
+//            else
+//            {
+//                make.height.equalTo(200);
+//                make.width.equalTo(200);
+//            }
        
         }];
         
         [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.bottom.equalTo(self.mas_bottom).offset(-60.);
+            make.bottom.equalTo(self.mas_bottom).offset(-30.);
             make.left.equalTo(self.mas_left).offset(10.);
             make.right.equalTo(self.mas_right).offset(-10.);
             make.height.equalTo(40);

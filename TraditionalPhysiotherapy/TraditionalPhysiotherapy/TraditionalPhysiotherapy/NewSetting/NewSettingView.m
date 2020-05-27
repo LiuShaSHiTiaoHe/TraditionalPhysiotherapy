@@ -48,11 +48,11 @@
         make.top.equalTo(self.mas_top);
         make.left.equalTo(self.mas_left);
         make.width.equalTo(UIScreenWidth);
-        make.height.equalTo(100.);
+        make.height.equalTo(80.);
     }];
     
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(myNavView.mas_top).offset(40.);
+        make.top.equalTo(myNavView.mas_top).offset(20.);
         make.centerX.equalTo(self.mas_centerX);
         make.width.equalTo(UIScreenWidth);
         make.height.equalTo(50.);

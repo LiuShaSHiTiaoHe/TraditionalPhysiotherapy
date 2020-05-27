@@ -11,7 +11,7 @@ pod 'UICountingLabel','~> 1.2.0'        #PNchart必备库(PNChart定制)
 pod 'PushNotificationManager'
 pod 'TYAlertController'
 pod 'PGDatePicker','~> 2.0.1'
-pod 'VIMVideoPlayer'
+pod 'VIMVideoPlayer' 
 pod 'LLSimpleCamera', '~> 4.1'
 pod 'EasyShowView','~>2.0'
 pod 'HWDownSelectedView', '~> 1.0.1'
