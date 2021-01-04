@@ -100,7 +100,13 @@ typedef void(^GenderSelectCompletion)(NSInteger index);
         NSString *filePath = [projectPicPath stringByAppendingPathComponent:imagePath]; //Add the file name
         NSLog(@"original filePath is %@",filePath);
 //        [tempImages addObject:[GlobalDataManager resizeImageByvImage:[UIImage imageWithContentsOfFile:filePath]]];
-        [tempImages addObject:[UIImage imageWithContentsOfFile:filePath]];
+      
+        UIImage *fileImage = [UIImage imageWithContentsOfFile:filePath];
+        if (fileImage) {
+            [tempImages addObject:[UIImage imageWithContentsOfFile:filePath]];
+        }else{
+            
+        }
 
     }
     image.images = tempImages;
