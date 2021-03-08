@@ -119,6 +119,9 @@
 {
     curentInfo = info;
     curentArray = [[BillDao shareInstanceBillDao] getBillInfoByUser:curentInfo.userId];
+
+//    NSArray *tempArray = [[BillDao shareInstanceBillDao] getBillInfoByUser:curentInfo.userId];
+//    [curentArray addObjectsFromArray: tempArray.reverseObjectEnumerator.allObjects];
     [infoTableView reloadData];
 }
 

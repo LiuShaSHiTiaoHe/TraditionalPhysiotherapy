@@ -64,7 +64,7 @@ static BillDao *instance = nil;
     FMDatabaseQueue *queue = [DataBaseQueue shareInstance];
     [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
         
-        FMResultSet *rs = [db executeQuery:@"SELECT * FROM BILL WHERE userid = ? ",userid];
+        FMResultSet *rs = [db executeQuery:@"SELECT * FROM BILL WHERE userid = ? ORDER BY recordtime DESC",userid];
         
         while ([rs next])
         {
